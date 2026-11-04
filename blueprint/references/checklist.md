@@ -49,6 +49,7 @@ Use the section for the document you just wrote (see *Review gate* in SKILL.md),
 - [ ] Every Open choice in SPEC has an experiment task that records the winner back into SPEC.
 - [ ] Each task has "Done when" items that can be verified without judgment calls.
 - [ ] Tasks do not depend on later tasks.
+- [ ] Steps only a person can do are marked 👤 and say what the agent prepares before stopping.
 
 ## Across documents
 

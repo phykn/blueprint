@@ -2,6 +2,7 @@
 
 > Ordered work plan. A coding agent should do **one task at a time**, top to bottom, and check it off when its "Done when" items pass.
 > Read `PRD.md` and `SPEC.md` before starting any task.
+> Tasks marked 👤 need a person. The agent prepares what the person needs, then stops; it does not fake the result.
 
 ## How to use
 
@@ -39,6 +40,14 @@ Tell your coding agent:
 - Do: {...}
 - Done when:
   - [ ] {...}
+
+### [ ] 👤 T5. {Step only a person can do, e.g., expert review}
+
+- Serves: {success criterion}
+- Do: {What the person does. The agent prepares the inputs and stops.}
+- Done when:
+  - [ ] {The person's result meets the criterion}
+  - [ ] {What to record if it doesn't}
 
 ## Done
 

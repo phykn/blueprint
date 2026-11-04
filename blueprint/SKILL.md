@@ -50,6 +50,7 @@ Ask the user only what the user can actually know. Decide the rest yourself.
 | Choices the user has already stated a preference on | Anything the user says they can't judge |
 
 - Even an expert user usually can't judge deep technical trade-offs on the spot. Don't turn your job into a multiple-choice quiz for them.
+- **Every question costs the user effort. Ask only when a wrong guess is expensive.** Even for something the user could answer, if there is a safe default that is cheap to change later (e.g., "postpone the Mac test until a Mac is available"), take it, list it under Assumptions, and move on. Ask when a wrong guess would waste significant work, can't be undone, or must match existing data.
 - When you decide, pick the option you'd defend to a senior engineer, record it in SPEC with its reason and rejected alternatives, and mark it **[AI]** (user decisions are **[User]**) so the user can see and override it.
 - If you genuinely can't tell which option is best, don't ask the user to guess either: make it an **Open choice** with a comparison you design and a rule that picks the winner.
 - After deciding a batch of things, show a short summary of your [AI] decisions so the user can object. Silence or approval means proceed.
@@ -113,6 +114,7 @@ Goal: a sequence an agent can execute one task per session.
 - Every task has **Done when** criteria that a person or a command can verify.
 - Link each task to the PRD requirement it serves (e.g., `R2`).
 - Each Open choice in SPEC becomes an experiment task whose result is recorded back into SPEC Decisions.
+- Some steps can only be done by a person: expert judgment, testing on a device the agent can't reach, getting data or credentials. Mark them 👤. The agent prepares everything for them and stops. Put 👤 tasks that don't block others (e.g., a check on another device) where they can wait without holding up the rest.
 
 Write `docs/TASKS.md` from `templates/TASKS.md`. Then run the *Review gate*.
 
