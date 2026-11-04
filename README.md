@@ -11,12 +11,17 @@ need to be a developer to use it.
 
 | File | What it covers |
 | --- | --- |
-| `docs/PRD.md` | Why build it, for whom, what it does and doesn't do, and what "done" means |
-| `docs/SPEC.md` | How it's built: stack, screens, data, and each decision with its reason |
-| `docs/TASKS.md` | Small, ordered tasks an agent can do one at a time, each with a check |
+| `docs/blueprint/PRD.md` | Why build it, for whom, what it does and doesn't do, and what "done" means |
+| `docs/blueprint/SPEC.md` | How it's built: stack, screens, data, and each decision with its reason |
+| `docs/blueprint/TASKS.md` | Small, ordered tasks an agent can do one at a time, each with a check |
 
 It works for web and mobile apps and for data projects such as deep learning
 models. The documents are written in the language you use with the agent.
+
+The documents stay on your machine: Blueprint adds a `.gitignore` inside
+`docs/blueprint/` so git ignores them, and it never commits or pushes them
+unless you ask. Start your coding session in the same folder, since a fresh
+clone or worktree won't have them.
 
 ## How it works
 

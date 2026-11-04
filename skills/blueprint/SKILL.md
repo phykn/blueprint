@@ -7,18 +7,20 @@ description: Turns a rough app, feature, or ML model idea into documents an AI c
 
 In vibe coding, the AI writes the code. The human's job is the blueprint: deciding **why**, **what**, and **what done looks like**. This skill helps the user write that blueprint.
 
-The output is three Markdown files:
+The output is three Markdown files in the user's project. Paths under `templates/` and `references/` are in this skill's folder.
 
 | File | Answers | Template |
 |---|---|---|
-| `docs/PRD.md` | Why build it, for whom, what success looks like, what is out of scope | `templates/PRD.md` |
-| `docs/SPEC.md` | How it will be built: stack, data, screens or model, decisions and their reasons | `templates/SPEC.md` |
-| `docs/TASKS.md` | Ordered, small tasks an agent can do one at a time, each with a check | `templates/TASKS.md` |
+| `docs/blueprint/PRD.md` | Why build it, for whom, what success looks like, what is out of scope | `templates/PRD.md` |
+| `docs/blueprint/SPEC.md` | How it will be built: stack, data, screens or model, decisions and their reasons | `templates/SPEC.md` |
+| `docs/blueprint/TASKS.md` | Ordered, small tasks an agent can do one at a time, each with a check | `templates/TASKS.md` |
+
+**The documents stay on the user's machine.** Before writing the first one, create `docs/blueprint/.gitignore` containing the single line `*`, so git ignores the whole folder without changing the project's own `.gitignore`. Never commit, push, or upload these files unless the user explicitly asks.
 
 ## Principles
 
 - **The user owns the decisions; you own the structure.** Never silently invent requirements. If you fill a gap with a default, mark it as an assumption so the user can see and change it.
-- **Never guess values that must match existing things.** Class or label IDs, column names, file naming rules, formats, units, API fields: if the value has to match data, files, or systems that already exist, ask. Do not pick one and move on, even if it seems obvious.
+- **Never guess values that must match existing things.** Class or label IDs, column names, status names, file naming rules, formats, units, API fields: if the value has to match data, files, or systems that already exist, ask. Do not pick one and move on, even if it seems obvious. A data sample shows which values occur, not every value that exists: confirm a full list (all statuses, all classes) with the user unless a definition or schema in the files gives it.
 - **Write for an agent that has never met the user.** Every document must make sense with no chat history. If a sentence only makes sense because of the conversation, rewrite it.
 - **Testable over descriptive.** "Fast" is not a requirement; "the list loads in under 1 second with 1,000 items" is. Subjective checks (e.g., expert judgment) must still have a count or ratio that decides pass or fail.
 - **Say what not to do.** Out-of-scope items prevent more wasted work than in-scope items.
@@ -50,7 +52,8 @@ Ask the user only what the user can actually know. Decide the rest yourself.
 | Choices the user has already stated a preference on | Anything the user says they can't judge |
 
 - Even an expert user usually can't judge deep technical trade-offs on the spot. Don't turn your job into a multiple-choice quiz for them.
-- **Every question costs the user effort. Ask only when a wrong guess is expensive.** Even for something the user could answer, if there is a safe default that is cheap to change later (e.g., "postpone the Mac test until a Mac is available"), take it, list it under Assumptions, and move on. Ask when a wrong guess would waste significant work, can't be undone, or must match existing data.
+- **Every question costs the user effort. Ask only when a wrong guess is expensive.** A default is for a choice, not a fact. When a choice has a safe default that is cheap to change later (e.g., "postpone the Mac test until a Mac is available"), take it, list it under Assumptions, and move on. Ask when a wrong guess would waste significant work, can't be undone, or must match existing data.
+- **Facts are never defaults**, even when they will become settings. How the user's work runs today (opening hours, limits, status names), deadlines, budgets, and the devices people use come from the user or their files. Read them from the files when the files settle them; otherwise ask.
 - When you decide, pick the option you'd defend to a senior engineer, record it in SPEC with its reason and rejected alternatives, and mark it **[AI]** (user decisions are **[User]**) so the user can see and override it.
 - If you genuinely can't tell which option is best, don't ask the user to guess either: make it an **Open choice** with a comparison you design and a rule that picks the winner.
 - After deciding a batch of things, show a short summary of your [AI] decisions so the user can object. Silence or approval means proceed.
@@ -69,7 +72,7 @@ These rules apply to every question in every step.
 
 ### 0. Check what exists
 
-Look for existing `docs/PRD.md`, `docs/SPEC.md`, `docs/TASKS.md`, `README`, data, or code. If documents exist, **update** them instead of starting over, and tell the user what you changed. If code or data exists, read enough of it to keep the documents consistent with reality — and to answer "must match existing" questions yourself where the files make the answer certain.
+Look for existing documents in `docs/blueprint/`, a `README`, data, or code. If documents exist, **update** them instead of starting over, and tell the user what you changed. If code or data exists, read enough of it to keep the documents consistent with reality — and to answer "must match existing" questions yourself where the files make the answer certain.
 
 ### 1. Interview (PRD)
 
@@ -91,7 +94,7 @@ Goal: understand the problem before the solution.
 - Stop interviewing when you can fill the PRD template's required sections. Unknowns go into "Open questions".
 - If the user says "just write it", draft with clearly marked assumptions instead of asking more.
 
-Write `docs/PRD.md` from `templates/PRD.md`. Show a short summary (not the whole file) and ask the user to confirm or correct it. Then run the *Review gate*.
+Write `docs/blueprint/PRD.md` from `templates/PRD.md`. Show a short summary (not the whole file) and ask the user to confirm or correct it. Then run the *Review gate*.
 
 ### 2. Design (SPEC)
 
@@ -103,7 +106,7 @@ Goal: decide how, at the level an agent needs to start without guessing.
 - Every non-obvious choice goes into **Decisions** with: the choice, the reason, and alternatives rejected.
 - **When the right choice can only be found by trying** (model architecture, loss, hyperparameters, thresholds, libraries with unknown fit), don't force a decision. Write it under **Open choices** as candidates, how they will be compared, and the rule that picks the winner. These become experiment tasks in TASKS.
 
-Write `docs/SPEC.md` from `templates/SPEC.md`. Summarize the key decisions for the user and confirm. Then run the *Review gate*.
+Write `docs/blueprint/SPEC.md` from `templates/SPEC.md`. Summarize the key decisions for the user and confirm. Then run the *Review gate*.
 
 ### 3. Plan (TASKS)
 
@@ -116,26 +119,26 @@ Goal: a sequence an agent can execute one task per session.
 - Each Open choice in SPEC becomes an experiment task whose result is recorded back into SPEC Decisions.
 - Some steps can only be done by a person: expert judgment, testing on a device the agent can't reach, getting data or credentials. Mark them 👤. The agent prepares everything for them and stops. Put 👤 tasks that don't block others (e.g., a check on another device) where they can wait without holding up the rest.
 
-Write `docs/TASKS.md` from `templates/TASKS.md`. Then run the *Review gate*.
+Write `docs/blueprint/TASKS.md` from `templates/TASKS.md`. Then run the *Review gate*.
 
 ### Review gate (after every document)
 
 Run this after the user confirms each document, **even if they approved it without changes**.
 
 1. Check the document against its section in `references/checklist.md`, and against the documents written before it.
-2. Pay special attention to: numbers that don't add up, values that must match existing data but were never confirmed, assumptions you made without listing them, requirements that are really "how", and success criteria that can't be checked.
+2. Pay special attention to: numbers that don't add up, values that must match existing data but were never confirmed, facts filled in as defaults, assumptions you made without listing them, requirements that are really "how", and success criteria that can't be checked.
 3. Report what you found as a short list, most serious first, each with one line of why it matters.
 4. Fix what you can yourself without a user decision (moving content, listing an assumption) and say so.
 5. Ask about the rest following *How to ask* — one at a time.
-6. Update the document and its Change log, then review again. Move on only when a review finds nothing new.
+6. Update the document, then review again. Move on only when a review finds nothing new.
 
 ### 4. Final review and hand-off
 
-Run the "Across documents" section of `references/checklist.md` over all three files and fix anything left. Then tell the user:
+Run the "Across documents" section of `references/checklist.md` over all three files and fix anything left. If the project is a git repository, confirm that `git status` does not list `docs/blueprint/`. Then tell the user:
 
-- which files were written,
+- which files were written, and that they are kept out of git,
 - the remaining open questions and assumptions, if any,
-- how to start building, e.g.: *"Ask your coding agent: Read docs/PRD.md, docs/SPEC.md and docs/TASKS.md, then do task T1."*
+- how to start building: open a new session of their coding agent in this same folder and paste the prompt from the *How to use* section of `docs/blueprint/TASKS.md`. Quote that prompt so they can copy it. The files are not in git, so a separate clone, worktree, or cloud task will not have them.
 
 ## Updating documents later
 

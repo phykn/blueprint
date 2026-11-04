@@ -71,7 +71,7 @@ Things we are deliberately **not** doing in this version. The coding agent must 
 
 ## 11. Assumptions
 
-Gaps filled with a default instead of a user decision, including anything the skill proposed. Confirm or change these.
+Gaps filled with a default instead of a user decision, including anything the AI proposed. Confirm or change these.
 
 - {e.g., Assumed only one person uses the app at a time}
 

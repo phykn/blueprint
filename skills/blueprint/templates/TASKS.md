@@ -8,7 +8,7 @@
 
 Tell your coding agent:
 
-> Read docs/PRD.md, docs/SPEC.md and docs/TASKS.md. Do the first unchecked task only. When finished, verify every "Done when" item, check the task off, and stop.
+> Read docs/blueprint/PRD.md, docs/blueprint/SPEC.md and docs/blueprint/TASKS.md. Do the first unchecked task only. When finished, verify every "Done when" item, check the task off, and stop.
 
 ## Tasks
 
