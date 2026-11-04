@@ -1,0 +1,11 @@
+{
+  "name": "blueprint",
+  "version": "0.1.0",
+  "description": "Turn a rough app, feature, or ML model idea into PRD, SPEC, and TASKS docs an AI coding agent can build from.",
+  "author": {
+    "name": "phykn",
+    "url": "https://github.com/phykn"
+  },
+  "homepage": "https://github.com/phykn/blueprint",
+  "repository": "https://github.com/phykn/blueprint"
+}

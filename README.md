@@ -23,29 +23,44 @@
 
 ## 설치
 
-`blueprint` 폴더는 [Agent Skills](https://agentskills.io) 표준 형식(`SKILL.md` + 참고 파일)이라 Claude Code와 Codex에서 그대로 쓸 수 있습니다. 폴더를 각 도구의 스킬 경로에 복사하세요.
+### Claude Code
+
+```text
+/plugin marketplace add phykn/blueprint
+/plugin install blueprint@blueprint
+```
+
+이미 설치했다면 업데이트 후 `/reload-plugins`를 실행하세요.
+
+### Codex와 ChatGPT 데스크톱 앱
+
+```text
+codex plugin marketplace add phykn/blueprint
+codex plugin add blueprint@blueprint
+```
+
+플러그인이 바로 보이지 않으면 ChatGPT 데스크톱 앱을 다시 시작하세요.
+
+### 직접 복사
+
+플러그인 없이 쓰려면 `skills/blueprint` 폴더를 각 도구의 스킬 경로에 복사하세요. [Agent Skills](https://agentskills.io) 표준 형식(`SKILL.md` + 참고 파일)이라 그대로 동작합니다.
 
 | 도구 | 개인용 (모든 프로젝트) | 프로젝트용 |
 |---|---|---|
 | Claude Code | `~/.claude/skills/blueprint` | `<project>/.claude/skills/blueprint` |
 | Codex | `~/.agents/skills/blueprint` | `<project>/.agents/skills/blueprint` |
 
-```bash
-# 예: 둘 다 개인용으로 설치
-cp -r blueprint ~/.claude/skills/
-mkdir -p ~/.agents/skills && cp -r blueprint ~/.agents/skills/
-```
-
-> Codex의 스킬 경로는 버전에 따라 다를 수 있습니다. 이전 버전은 `~/.codex/skills/`를 씁니다.
-
 ## 사용
 
-"앱 아이디어가 있는데 문서부터 만들어 줘", "이 모델 만들기 전에 PRD 써 줘"처럼 말하면 스킬이 자동으로 실행됩니다. 직접 부르려면 Claude Code에서는 `/blueprint`, Codex에서는 `$blueprint`를 입력하세요.
+"앱 아이디어가 있는데 문서부터 만들어 줘", "이 모델 만들기 전에 PRD 써 줘"처럼 말하면 스킬이 자동으로 실행됩니다. 직접 부르려면 Claude Code에서는 `/blueprint` (플러그인으로 설치했다면 `/blueprint:blueprint`), Codex에서는 `$blueprint`를 입력하세요.
 
 ## 구조
 
 ```
-blueprint/
+.claude-plugin/           # Claude Code 플러그인·마켓플레이스 메타데이터
+.codex-plugin/            # Codex 플러그인 메타데이터
+.agents/plugins/          # Codex 마켓플레이스
+skills/blueprint/
 ├── SKILL.md              # 스킬 지침
 ├── templates/
 │   ├── PRD.md
@@ -54,3 +69,5 @@ blueprint/
 └── references/
     └── checklist.md      # 문서 검토 기준
 ```
+
+두 도구 모두 같은 `skills/blueprint/SKILL.md`를 읽습니다. 빌드 단계나 도구별 사본은 없습니다.

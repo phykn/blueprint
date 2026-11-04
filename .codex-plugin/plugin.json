@@ -1,0 +1,37 @@
+{
+  "name": "blueprint",
+  "version": "0.1.0",
+  "description": "Turn a rough app, feature, or ML model idea into PRD, SPEC, and TASKS docs an AI coding agent can build from.",
+  "author": {
+    "name": "phykn",
+    "url": "https://github.com/phykn"
+  },
+  "homepage": "https://github.com/phykn/blueprint",
+  "repository": "https://github.com/phykn/blueprint",
+  "keywords": [
+    "skills",
+    "vibe-coding",
+    "prd",
+    "spec",
+    "planning"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Blueprint",
+    "shortDescription": "Write PRD, SPEC, and TASKS before vibe coding",
+    "longDescription": "Use Blueprint to turn a rough idea into documents an AI coding agent can build from without guessing: a PRD (why and what), a SPEC (how), and TASKS (ordered, verifiable steps). It interviews in plain language, one question at a time, so non-developers can use it, and reviews each document against a checklist.",
+    "developerName": "phykn",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use Blueprint to turn my app idea into PRD, SPEC, and TASKS docs.",
+      "Use Blueprint to plan this model before we write any code."
+    ],
+    "websiteURL": "https://github.com/phykn/blueprint",
+    "screenshots": []
+  }
+}

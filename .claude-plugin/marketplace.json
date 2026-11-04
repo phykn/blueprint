@@ -1,0 +1,18 @@
+{
+  "name": "blueprint",
+  "owner": {
+    "name": "phykn"
+  },
+  "description": "Marketplace for Blueprint: write the docs before vibe coding.",
+  "plugins": [
+    {
+      "name": "blueprint",
+      "source": {
+        "source": "github",
+        "repo": "phykn/blueprint"
+      },
+      "description": "Turn a rough app, feature, or ML model idea into PRD, SPEC, and TASKS docs an AI coding agent can build from.",
+      "category": "productivity"
+    }
+  ]
+}
