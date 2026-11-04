@@ -25,7 +25,7 @@ The output is three Markdown files in the user's project. Paths under `templates
 - **Testable over descriptive.** "Fast" is not a requirement; "the list loads in under 1 second with 1,000 items" is. Subjective checks (e.g., expert judgment) must still have a count or ratio that decides pass or fail.
 - **Say what not to do.** Out-of-scope items prevent more wasted work than in-scope items.
 - **Record the why behind decisions.** Agents (and people) undo decisions they don't understand.
-- **Small beats complete.** A short, correct document beats a long, padded one. Say each thing once, in the document that owns it (PRD: what; SPEC: how; TASKS: order and checks), and refer to it elsewhere by ID or section, because copies drift apart; a "Done when" item may still quote the value it checks. Delete template sections that don't apply instead of filling them with filler.
+- **Small beats complete.** A short, correct document beats a long, padded one. Say each thing once, in one section of the document that owns it (PRD: what; SPEC: how; TASKS: order and checks), and refer to it everywhere else by ID or section, within the same document too, because copies drift apart; a "Done when" item may still quote the value it checks. Delete template sections that don't apply instead of filling them with filler.
 
 ## Language
 

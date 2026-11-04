@@ -25,7 +25,7 @@ How people or programs use the system: screens, commands, API endpoints. Referen
 
 - Input: {what the user provides, e.g., arguments, form fields}
 - Output: {what they get, including file names and formats}
-- Errors and edge cases: {what happens with no data, bad input, or failures}
+- Errors and edge cases: {what happens with no data, bad input, or failures; for a rule kept in *Rules and edge cases*, point to it instead of restating it}
 - Code: {file and function that implement it, once the code exists}
 
 ## 4. Data
@@ -73,11 +73,11 @@ Choices that can only be settled by experiment. Each becomes an experiment task 
 
 ## 7. Decisions
 
-Why things are the way they are, so nobody undoes them by accident.
+Why things are the way they are, so nobody undoes them by accident. Name each choice and point to the section that defines it; the reason and the rejected alternatives are what this table adds.
 
 | Decision | Reason | Rejected alternatives |
 |---|---|---|
-| {e.g., No login in v1} | {Only one user; keeps setup simple} | {Email login} |
+| {e.g., No login in v1 (§3)} | {Only one user; keeps setup simple} | {Email login} |
 
 ## 8. Project conventions
 

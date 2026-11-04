@@ -70,6 +70,6 @@ Use "Every document" and the section for the document you just wrote (see *Revie
 - [ ] Names (screens, entities, fields, classes) are spelled the same in all three files.
 - [ ] No document relies on the chat history to be understood.
 - [ ] No contradictions (e.g., PRD says "no login", SPEC has a login screen).
-- [ ] Each rule or value is defined in one place and referred to elsewhere by ID or section.
+- [ ] Each rule or value is written out in one section only; every other mention, in the same document or another, refers to it by ID or section.
 - [ ] Open questions are collected, not scattered or silently answered.
 - [ ] Unused template sections and placeholder text (`{...}`) are removed.
