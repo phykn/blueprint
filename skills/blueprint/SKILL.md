@@ -25,8 +25,7 @@ The output is three Markdown files in the user's project. Paths under `templates
 - **Testable over descriptive.** "Fast" is not a requirement; "the list loads in under 1 second with 1,000 items" is. Subjective checks (e.g., expert judgment) must still have a count or ratio that decides pass or fail.
 - **Say what not to do.** Out-of-scope items prevent more wasted work than in-scope items.
 - **Record the why behind decisions.** Agents (and people) undo decisions they don't understand.
-- **Small beats complete.** A short, correct document beats a long, padded one. Delete template sections that don't apply instead of filling them with filler.
-- **Don't trust approval alone.** A user saying "looks good" does not mean the document is complete. Review every document yourself before moving on (see *Review gate*).
+- **Small beats complete.** A short, correct document beats a long, padded one. Say each thing once, in the document that owns it (PRD: what; SPEC: how; TASKS: order and checks), and refer to it elsewhere by ID or section, because copies drift apart; a "Done when" item may still quote the value it checks. Delete template sections that don't apply instead of filling them with filler.
 
 ## Language
 
@@ -52,10 +51,10 @@ Ask the user only what the user can actually know. Decide the rest yourself.
 | Choices the user has already stated a preference on | Anything the user says they can't judge |
 
 - Even an expert user usually can't judge deep technical trade-offs on the spot. Don't turn your job into a multiple-choice quiz for them.
-- **Every question costs the user effort. Ask only when a wrong guess is expensive.** A default is for a choice, not a fact. When a choice has a safe default that is cheap to change later (e.g., "postpone the Mac test until a Mac is available"), take it, list it under Assumptions, and move on. Ask when a wrong guess would waste significant work, can't be undone, or must match existing data.
+- **Every question costs the user effort. Ask only when a wrong guess is expensive.** When a choice has a safe default that is cheap to change later (e.g., "postpone the Mac test until a Mac is available"), take it, list it under Assumptions, and move on. Ask when a wrong guess would waste significant work, can't be undone, or must match existing data.
 - **Facts are never defaults**, even when they will become settings. How the user's work runs today (opening hours, limits, status names), deadlines, budgets, and the devices people use come from the user or their files. Read them from the files when the files settle them; otherwise ask.
 - When you decide, pick the option you'd defend to a senior engineer, record it in SPEC with its reason and rejected alternatives, and mark it **[AI]** (user decisions are **[User]**) so the user can see and override it.
-- If you genuinely can't tell which option is best, don't ask the user to guess either: make it an **Open choice** with a comparison you design and a rule that picks the winner.
+- If you genuinely can't tell which option is best, don't ask the user to guess either: make it an **Open choice** (see *2. Design*).
 - After deciding a batch of things, show a short summary of your [AI] decisions so the user can object. Silence or approval means proceed.
 
 ## How to ask
@@ -85,7 +84,7 @@ Goal: understand the problem before the solution.
   3. The core flow: what a user does from start to finish in the main scenario
   4. What "done" looks like for the first version (success criteria)
   5. What is explicitly **not** in the first version
-  6. Constraints: deadline, budget, platforms or hardware, privacy
+  6. Constraints: deadline, budget, the devices each kind of user has, privacy
 - **If the project learns from or processes data** (ML models, data pipelines, analysis), also cover:
   - The input data: kind, amount, sizes, file formats, quirks (e.g., overlays, noise, missing values)
   - Labels or ground truth: format, how files are paired, ID/class numbering, how reliable they are
@@ -100,11 +99,10 @@ Write `docs/blueprint/PRD.md` from `templates/PRD.md`. Show a short summary (not
 
 Goal: decide how, at the level an agent needs to start without guessing.
 
-- Derive as much as possible from the PRD. Follow *Who decides what*: ask only about preferences and facts the user holds (e.g., "Must it run on a phone?", "Do you already have a model in mind?"); decide technical details yourself.
+- Derive as much as possible from the PRD, and ask only what *Who decides what* leaves to the user (e.g., "Must it run on a phone?", "Do you already have a model in mind?").
 - Prefer a simple, mainstream stack with fewer moving parts.
 - If a technical decision would change what the user gets (a PRD-level change, e.g., inference now needs labels as input), it is no longer a technical detail: confirm it with the user and update the PRD first.
-- Every non-obvious choice goes into **Decisions** with: the choice, the reason, and alternatives rejected.
-- **When the right choice can only be found by trying** (model architecture, loss, hyperparameters, thresholds, libraries with unknown fit), don't force a decision. Write it under **Open choices** as candidates, how they will be compared, and the rule that picks the winner. These become experiment tasks in TASKS.
+- **When the right choice can only be found by trying** (model architecture, loss, hyperparameters, thresholds, libraries with unknown fit), don't force a decision. Write it under **Open choices** as candidates, how they will be compared, and the rule that picks the winner.
 
 Write `docs/blueprint/SPEC.md` from `templates/SPEC.md`. Summarize the key decisions for the user and confirm. Then run the *Review gate*.
 
@@ -123,14 +121,13 @@ Write `docs/blueprint/TASKS.md` from `templates/TASKS.md`. Then run the *Review 
 
 ### Review gate (after every document)
 
-Run this after the user confirms each document, **even if they approved it without changes**.
+Run this after the user confirms each document, **even if they approved it without changes**: approval does not mean the document is complete.
 
 1. Check the document against its section in `references/checklist.md`, and against the documents written before it.
-2. Pay special attention to: numbers that don't add up, values that must match existing data but were never confirmed, facts filled in as defaults, assumptions you made without listing them, requirements that are really "how", and success criteria that can't be checked.
-3. Report what you found as a short list, most serious first, each with one line of why it matters.
-4. Fix what you can yourself without a user decision (moving content, listing an assumption) and say so.
-5. Ask about the rest following *How to ask* — one at a time.
-6. Update the document, then review again. Move on only when a review finds nothing new.
+2. Report what you found as a short list, most serious first, each with one line of why it matters.
+3. Fix what you can yourself without a user decision (moving content, listing an assumption) and say so.
+4. Ask about the rest following *How to ask* — one at a time.
+5. Update the document, then review again. Move on only when a review finds nothing new.
 
 ### 4. Final review and hand-off
 
@@ -154,4 +151,4 @@ The code shows what the project does; the user knows why. The documents record b
 
 ## Updating documents later
 
-When requirements change mid-project, update the PRD first, then SPEC, then TASKS, so the documents never contradict each other. Add a line to the PRD's Change log. When an experiment settles an Open choice, move it to Decisions in SPEC with the result. Mark completed tasks as done rather than deleting them.
+When requirements change mid-project, update the PRD first, then SPEC, then TASKS, so the documents never contradict each other, and review each changed document as in the *Review gate*. Add a line to the PRD's Change log. When an experiment settles an Open choice, move it to Decisions in SPEC with the result. Check off completed tasks in place rather than deleting them.

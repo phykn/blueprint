@@ -2,7 +2,13 @@
 
 The single test: **Could a coding agent that has never seen this conversation build the right thing from these documents alone, without asking or guessing?**
 
-Use the section for the document you just wrote (see *Review gate* in SKILL.md), plus "Existing projects" when documenting one, then "Across documents" at the end. Fix what you can yourself; turn the rest into questions for the user, one at a time.
+Use "Every document" and the section for the document you just wrote (see *Review gate* in SKILL.md), plus "Existing projects" when documenting one, then "Across documents" at the end. Fix what you can yourself; turn the rest into questions for the user, one at a time.
+
+## Every document
+
+- [ ] Numbers add up: counts, totals, splits, dates, and limits agree wherever they meet.
+- [ ] Every default you chose is visible, listed under the PRD's Assumptions or marked [AI] in SPEC, and each one is a choice. Facts the user holds (how their work runs today, deadlines, budget, devices) came from the user or their files.
+- [ ] Every value that must match existing data, files, or systems (names, IDs, status values, formats) was confirmed by the user or read from a definition, not inferred from a sample.
 
 ## PRD
 
@@ -12,8 +18,6 @@ Use the section for the document you just wrote (see *Review gate* in SKILL.md),
 - [ ] No requirement names a technology, library, or algorithm. Those belong in SPEC.
 - [ ] Every success criterion is checkable by a person or a test. No "easy", "fast", "intuitive", "good" without a number, a ratio, or an observable result.
 - [ ] Out of scope lists at least the obvious temptations (things an agent might "helpfully" add).
-- [ ] Every default you chose or proposed is listed under Assumptions, and each one is a choice. Facts the user holds (how their work runs today, deadlines, budget, devices) came from the user or their files.
-- [ ] Every value that must match existing data, files, or systems (names, IDs, status values, formats) was confirmed by the user or read from a definition, not inferred from a sample.
 
 ### PRD — data projects
 
@@ -66,5 +70,6 @@ Use the section for the document you just wrote (see *Review gate* in SKILL.md),
 - [ ] Names (screens, entities, fields, classes) are spelled the same in all three files.
 - [ ] No document relies on the chat history to be understood.
 - [ ] No contradictions (e.g., PRD says "no login", SPEC has a login screen).
+- [ ] Each rule or value is defined in one place and referred to elsewhere by ID or section.
 - [ ] Open questions are collected, not scattered or silently answered.
 - [ ] Unused template sections and placeholder text (`{...}`) are removed.

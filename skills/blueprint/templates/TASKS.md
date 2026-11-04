@@ -48,7 +48,3 @@ Tell your coding agent:
 - Done when:
   - [ ] {The person's result meets the criterion}
   - [ ] {What to record if it doesn't}
-
-## Done
-
-{Move or mark finished tasks here, with the date, instead of deleting them.}
