@@ -3,7 +3,7 @@
 > Technical specification. Explains **how** the requirements in `PRD.md` will be built, in enough detail that a coding agent can start without guessing.
 > Status: Draft | Confirmed — Last updated: {YYYY-MM-DD}
 >
-> Markers: **[User]** decided by the user · **[AI]** a technical decision the AI made because the user can't be expected to judge it. [AI] items can be overridden at any time.
+> Markers: **[User]** decided by the user · **[AI]** a technical decision the AI made because the user can't be expected to judge it · **[Code]** read from code that already exists. [AI] items can be overridden at any time.
 
 ## 1. Overview
 
@@ -26,6 +26,7 @@ How people or programs use the system: screens, commands, API endpoints. Referen
 - Input: {what the user provides, e.g., arguments, form fields}
 - Output: {what they get, including file names and formats}
 - Errors and edge cases: {what happens with no data, bad input, or failures}
+- Code: {file and function that implement it, once the code exists}
 
 ## 4. Data
 

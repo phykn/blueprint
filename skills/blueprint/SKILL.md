@@ -1,11 +1,11 @@
 ---
 name: blueprint
-description: Turns a rough app, feature, or ML model idea into documents an AI coding agent can build from without guessing — a PRD (why and what), a SPEC (how), and TASKS (ordered, verifiable steps). Use when the user wants to start vibe coding, plan a new app, feature, or model, write a PRD/spec/requirements, or says things like "I have an idea for an app", "help me plan this before coding", or "write docs so Claude/Codex can build it". Works for non-developers.
+description: Turns a rough app, feature, or ML model idea into documents an AI coding agent can build from without guessing — a PRD (why and what), a SPEC (how), and TASKS (ordered, verifiable steps) — or reads a project that already exists and writes the same documents for it, so people and agents can understand, debug, and improve it. Use when the user wants to start vibe coding, plan a new app, feature, or model, write a PRD/spec/requirements, or document an existing codebase, or says things like "I have an idea for an app", "help me plan this before coding", "write docs so Claude/Codex can build it", "이 프로젝트 블루프린트로 정리해 줘", or "document this project so I can understand it". Not for a quick explanation of one piece of code. Works for non-developers.
 ---
 
 # Blueprint
 
-In vibe coding, the AI writes the code. The human's job is the blueprint: deciding **why**, **what**, and **what done looks like**. This skill helps the user write that blueprint.
+In vibe coding, the AI writes the code. The human's job is the blueprint: deciding **why**, **what**, and **what done looks like**. This skill helps the user write that blueprint, either for something new or for a project that already exists (see *From an existing project*).
 
 The output is three Markdown files in the user's project. Paths under `templates/` and `references/` are in this skill's folder.
 
@@ -72,7 +72,7 @@ These rules apply to every question in every step.
 
 ### 0. Check what exists
 
-Look for existing documents in `docs/blueprint/`, a `README`, data, or code. If documents exist, **update** them instead of starting over, and tell the user what you changed. If code or data exists, read enough of it to keep the documents consistent with reality — and to answer "must match existing" questions yourself where the files make the answer certain.
+Look for existing documents in `docs/blueprint/`, a `README`, data, or code. If documents exist, **update** them instead of starting over, and tell the user what you changed. If the user wants documents for a project that is already built (to understand, document, debug, or improve it) rather than a plan for something new, follow *From an existing project* instead of steps 1–3. Otherwise, if code or data exists, read enough of it to keep the documents consistent with reality — and to answer "must match existing" questions yourself where the files make the answer certain.
 
 ### 1. Interview (PRD)
 
@@ -139,6 +139,18 @@ Run the "Across documents" section of `references/checklist.md` over all three f
 - which files were written, and that they are kept out of git,
 - the remaining open questions and assumptions, if any,
 - how to start building: open a new session of their coding agent in this same folder and paste the prompt from the *How to use* section of `docs/blueprint/TASKS.md`. Quote that prompt so they can copy it. The files are not in git, so a separate clone, worktree, or cloud task will not have them.
+
+## From an existing project
+
+The code shows what the project does; the user knows why. The documents record both, so someone who has never seen the project can find their way around it, fix it, and extend it.
+
+1. **Read before asking.** Find the entrypoints, how to run and test it, the main flows, the data, and outside services. Run the tests and safe commands that show behavior, and note the results; never run anything that sends, deploys, deletes, or touches real accounts. Where the README, comments, or tests disagree with the code, the code shows what happens, and the disagreement is a finding.
+2. **Point to the code.** Every interface, rule, and data structure in SPEC names the file and function that implement it (e.g., `rules.py` `available_slots()`), so a reader can jump from the document to the code. Put the commit you read (or the date, outside git) in each document's header line.
+3. **Built is not the same as intended.** Requirements say what the project is meant to do. Behavior that looks unintended (a contradiction, a crash, a mismatch with the docs or tests) is a finding, not a requirement. Ask the user about intent, not about how the code works: who uses it and why when the code can't tell you, and for each finding whether it is a bug or intended, one at a time, most serious first, following *How to ask*. Intended behavior becomes a requirement, a bug becomes a task, and an unanswered finding stays an Open question.
+4. **Write the documents** from the same templates, in the same order, running the *Review gate* after each and *4. Final review and hand-off* at the end:
+   - PRD: what it does today, for whom, and what it deliberately doesn't do.
+   - SPEC: how it works, with code pointers. Mark what you read in the code **[Code]**. A past decision whose reason neither the user nor the code history gives goes under Open questions, not Decisions with an invented reason.
+   - TASKS: the work the findings call for, most serious first: bug fixes with a regression test that fails first, doc fixes, missing tests for important rules, and code too unclear to change safely.
 
 ## Updating documents later
 

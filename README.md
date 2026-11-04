@@ -7,6 +7,11 @@ documents an AI coding agent can build from without guessing: why you're
 building it, how it will work, and the exact steps to get there. You don't
 need to be a developer to use it.
 
+It also works the other way: point it at a project that already exists, and
+it writes the same documents for what was built, with links into the code
+and a list of what to fix. That makes the project easier for people and
+agents to understand, debug, and improve.
+
 ## What you get
 
 | File | What it covers |
@@ -36,6 +41,11 @@ clone or worktree won't have them.
    or a baseline, comes first.
 4. **Review.** After you approve each document, Blueprint reviews it against a
    checklist and reports gaps and contradictions.
+
+For an existing project, Blueprint reads and runs the code first and asks you
+only about intent: who it's for, and whether each suspicious behavior it
+found is a bug or intended. Bugs become tasks instead of requirements, and
+every rule in the SPEC names the file and function that implement it.
 
 ## Install
 
@@ -74,6 +84,7 @@ Describe what you want to plan, and the skill starts on its own:
 ```text
 I have an idea for an app. Help me write the docs before we code.
 Write a PRD for this model before we build it.
+I built this project with Claude last year. Document it so I can understand and fix it.
 ```
 
 To start it directly, type `/blueprint:blueprint` in Claude Code (`/blueprint`

@@ -2,7 +2,7 @@
 
 The single test: **Could a coding agent that has never seen this conversation build the right thing from these documents alone, without asking or guessing?**
 
-Use the section for the document you just wrote (see *Review gate* in SKILL.md), then "Across documents" at the end. Fix what you can yourself; turn the rest into questions for the user, one at a time.
+Use the section for the document you just wrote (see *Review gate* in SKILL.md), plus "Existing projects" when documenting one, then "Across documents" at the end. Fix what you can yourself; turn the rest into questions for the user, one at a time.
 
 ## PRD
 
@@ -51,6 +51,15 @@ Use the section for the document you just wrote (see *Review gate* in SKILL.md),
 - [ ] Each task has "Done when" items that can be verified without judgment calls.
 - [ ] Tasks do not depend on later tasks.
 - [ ] Steps only a person can do are marked 👤 and say what the agent prepares before stopping.
+
+## Existing projects
+
+- [ ] Every interface, rule, and data structure in SPEC names the file and function that implement it, and each one exists.
+- [ ] Each behavior claim was checked by running or reading the code, not inferred from names, comments, or the README.
+- [ ] No bug or suspected bug is written as a requirement; each is a task or an Open question.
+- [ ] Disagreements between the code and its README, comments, or tests are listed.
+- [ ] Each document's header names the commit or date of the code it describes.
+- [ ] Decisions give only reasons the user or the code history supplied.
 
 ## Across documents
 

@@ -2,7 +2,7 @@
 
 > Ordered work plan. A coding agent should do **one task at a time**, top to bottom, and check it off when its "Done when" items pass.
 > Read `PRD.md` and `SPEC.md` before starting any task.
-> Tasks marked 👤 need a person. The agent prepares what the person needs, then stops; it does not fake the result.
+> Tasks marked 👤 need a person. The agent prepares what the person needs, then stops; it does not fake the result. When a later session finds a 👤 task first, the agent asks whether the person has done it, checks what it can, and checks the task off once they confirm.
 
 ## How to use
 
