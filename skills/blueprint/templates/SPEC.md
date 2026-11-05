@@ -1,15 +1,15 @@
 # SPEC: {Product or feature name}
 
 > Technical specification. Explains **how** the requirements in `PRD.md` will be built, in enough detail that a coding agent can start without guessing.
-> Status: Draft | Confirmed — Last updated: {YYYY-MM-DD}
+> Last updated: {YYYY-MM-DD} — Code read at: `{commit}` (Document and Rebuild modes)
 >
-> Markers: **[User]** decided by the user · **[AI]** a technical decision the AI made because the user can't be expected to judge it · **[Code]** read from code that already exists. [AI] items can be overridden at any time.
+> Markers: **[User]** said by the person · **[AI]** decided by the AI · **[Code]** read from existing code or files. Any [AI] item can be overridden.
 
-## 1. Overview
+## Overview
 
 {One paragraph: the shape of the system. e.g., "A web app with a single page front end and a small database." or "A Python package with a training script and a batch inference script."}
 
-## 2. Tech stack
+## Tech stack
 
 | Area | Choice | Why |
 |---|---|---|
@@ -17,7 +17,7 @@
 | {e.g., Data storage} | {e.g., SQLite} | {...} |
 | {e.g., Runtime} | {e.g., Local GPU} | {...} |
 
-## 3. Interfaces
+## Interfaces
 
 How people or programs use the system: screens, commands, API endpoints. Reference requirement IDs. Keep the subsections that apply.
 
@@ -28,7 +28,7 @@ How people or programs use the system: screens, commands, API endpoints. Referen
 - Errors and edge cases: {what happens with no data, bad input, or failures; for a rule kept in *Rules and edge cases*, point to it instead of restating it}
 - Code: {file and function that implement it, once the code exists}
 
-## 4. Data
+## Data
 
 The things the system reads, stores, or writes, and their structure.
 
@@ -38,7 +38,7 @@ The things the system reads, stores, or writes, and their structure.
 |---|---|---|
 | {name} | {text} | {required, max 100 characters} |
 
-## 5. Model and training
+## Model and training
 
 > Keep this section for ML projects. Delete it otherwise.
 
@@ -65,27 +65,27 @@ Choices that can only be settled by experiment. Each becomes an experiment task 
 
 {Where checkpoints, logs, and outputs are saved, and how they are named, so runs can be compared and reproduced.}
 
-## 6. Rules and edge cases
+## Rules and edge cases
 
 {Behaviour that is easy to get wrong: validation, permissions, limits, duplicates, time zones, reserved values, etc.}
 
 - {e.g., Prices are stored in cents as integers to avoid rounding errors}
 
-## 7. Decisions
+## Decisions
 
-Why things are the way they are, so nobody undoes them by accident. Name each choice and point to the section that defines it; the reason and the rejected alternatives are what this table adds.
+Why things are the way they are, so nobody undoes them by accident. Name each choice and point to the section that defines it; the reason and the rejected alternatives are what this table adds. A choice whose reason already sits in a "Why" column appears here only when its rejected alternatives are worth recording, and then without repeating the reason.
 
 | Decision | Reason | Rejected alternatives |
 |---|---|---|
-| {e.g., No login in v1 (§3)} | {Only one user; keeps setup simple} | {Email login} |
+| {e.g., No login in v1 (*Interfaces*)} [AI] | {Only one user; keeps setup simple} | {Email login} |
 
-## 8. Project conventions
+## Project conventions
 
 {Folder layout, naming, formatting, how to run and test the project. Delete what the stack's defaults already cover.}
 
 - Run: `{command}`
 - Test: `{command}`
 
-## 9. Open questions
+## Open questions
 
 - {...}

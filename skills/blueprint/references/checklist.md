@@ -2,22 +2,22 @@
 
 The single test: **Could a coding agent that has never seen this conversation build the right thing from these documents alone, without asking or guessing?**
 
-Use "Every document" and the section for the document you just wrote (see *Review gate* in SKILL.md), plus "Existing projects" when documenting one, then "Across documents" at the end. Fix what you can yourself; turn the rest into questions for the user, one at a time.
+Use "Every document" and the section for each document (see *4. Review* in SKILL.md), plus "Document mode" or "Rebuild mode" when one applies, then "Across documents". Fix what you can yourself; what needs the person's intent or an outside fact becomes an assumption or an Open question.
 
 ## Every document
 
 - [ ] Numbers add up: counts, totals, splits, dates, and limits agree wherever they meet.
-- [ ] Every default you chose is visible, listed under the PRD's Assumptions or marked [AI] in SPEC, and each one is a choice. Facts the user holds (how their work runs today, deadlines, budget, devices) came from the user or their files.
-- [ ] Every value that must match existing data, files, or systems (names, IDs, status values, formats) was confirmed by the user or read from a definition, not inferred from a sample.
+- [ ] Every decision the AI made is marked [AI] where it is written, with its reason. Every fact nobody stated and no file settles is listed under the PRD's Assumptions, not presented as known.
+- [ ] Every value that must match existing data, files, or systems (names, IDs, status values, formats) was read from a definition or given by the person, not inferred from a sample.
 
 ## PRD
 
-- [ ] The problem is described before any solution.
+- [ ] The Problem section opens with a one-sentence center, and the problem is described before any solution.
 - [ ] The core scenario is a concrete, step-by-step flow, not a feature list.
-- [ ] Every requirement has an ID and a priority (Must / Later).
+- [ ] Every requirement has an ID, a priority (Must / Later), and a source marker.
 - [ ] No requirement names a technology, library, or algorithm. Those belong in SPEC.
 - [ ] Every success criterion is checkable by a person or a test. No "easy", "fast", "intuitive", "good" without a number, a ratio, or an observable result.
-- [ ] Out of scope lists at least the obvious temptations (things an agent might "helpfully" add).
+- [ ] Out of scope lists at least the obvious temptations (things an agent might "helpfully" add), each with a reason.
 
 ### PRD — data projects
 
@@ -56,16 +56,30 @@ Use "Every document" and the section for the document you just wrote (see *Revie
 - [ ] Tasks do not depend on later tasks.
 - [ ] Steps only a person can do are marked 👤 and say what the agent prepares before stopping.
 
-## Existing projects
+## Document mode
 
 - [ ] Every interface, rule, and data structure in SPEC names the file and function that implement it, and each one exists.
 - [ ] Each behavior claim was checked by running or reading the code, not inferred from names, comments, or the README.
 - [ ] No bug or suspected bug is written as a requirement; each is a task or an Open question.
 - [ ] Disagreements between the code and its README, comments, or tests are listed.
 - [ ] Each document's header names the commit or date of the code it describes.
-- [ ] Decisions give only reasons the user or the code history supplied.
+- [ ] Decisions give only reasons the person or the code history supplied.
+
+## Rebuild mode
+
+- [ ] The PRD is built from the core idea (problem, users, outcome), not from the old feature list.
+- [ ] Every outside contract found in the old project (formats others read or write, stored data, API fields, called commands, shared IDs) is kept as a requirement, or changed by a decision in SPEC with its reason and cost; stored data has a migration.
+- [ ] Every old feature that was dropped is under Out of scope with a reason.
+- [ ] Every bug or pain point found in the old project is a requirement or a check in the new plan.
+- [ ] Each reuse of the old stack or structure is in Decisions with a reason of its own.
+- [ ] Each document's header names the commit or date of the old code that was read.
+- [ ] SPEC Decisions says where the new code goes so the old version keeps working; the first task sets it up and the last task is a 👤 switch-over.
+- [ ] Each kept contract has a task that checks it against the old version; each changed contract has a transition (migration, old form still accepted for a while after the switch-over) with a task that checks it.
 
 ## Across documents
+
+- [ ] Every part of the PRD's center sentence is answered by the plan; no part of it was dropped or traded for an easier problem.
+- [ ] Every claim built on a repeated pattern was confirmed in the files, not only inferred.
 
 - [ ] Names (screens, entities, fields, classes) are spelled the same in all three files.
 - [ ] No document relies on the chat history to be understood.

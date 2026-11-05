@@ -1,13 +1,13 @@
 ---
 name: blueprint
-description: Turns a rough app, feature, or ML model idea into documents an AI coding agent can build from without guessing — a PRD (why and what), a SPEC (how), and TASKS (ordered, verifiable steps) — or reads a project that already exists and writes the same documents for it, so people and agents can understand, debug, and improve it. Use when the user wants to start vibe coding, plan a new app, feature, or model, write a PRD/spec/requirements, or document an existing codebase, or says things like "I have an idea for an app", "help me plan this before coding", "write docs so Claude/Codex can build it", "이 프로젝트 블루프린트로 정리해 줘", or "document this project so I can understand it". Not for a quick explanation of one piece of code. Works for non-developers.
+description: Turns an idea, or a project that already exists, into documents an AI coding agent can build from without guessing — a PRD (why and what), a SPEC (how), and TASKS (ordered, verifiable steps). The AI makes the planning decisions; the person supplies the idea and only the facts the AI cannot find in the files. Three modes — plan something new, document an existing project as it is, or rebuild an existing project from zero keeping only its core idea. Use when the user wants to plan an app, feature, or ML model before vibe coding, write a PRD/spec/requirements, document a codebase, or redo one from scratch, or says things like "I have an idea for an app", "write docs so Claude/Codex can build it", "document this project so I can understand it", "rebuild this from scratch", "이 프로젝트 블루프린트로 정리해 줘", or "이거 처음부터 다시 짜 줘". Writes documents only, never product code. Not for a quick explanation of one piece of code. Works for non-developers.
 ---
 
 # Blueprint
 
-In vibe coding, the AI writes the code. The human's job is the blueprint: deciding **why**, **what**, and **what done looks like**. This skill helps the user write that blueprint, either for something new or for a project that already exists (see *From an existing project*).
+The person brings an idea. The AI does the planning: it decides what to build, how, and in what order, and writes it down so a coding agent can build it without asking anyone. The person is asked only for what no file can tell the AI.
 
-The output is three Markdown files in the user's project. Paths under `templates/` and `references/` are in this skill's folder.
+The output is three Markdown files in the person's project. Paths under `templates/` and `references/` are in this skill's folder.
 
 | File | Answers | Template |
 |---|---|---|
@@ -15,140 +15,127 @@ The output is three Markdown files in the user's project. Paths under `templates
 | `docs/blueprint/SPEC.md` | How it will be built: stack, data, screens or model, decisions and their reasons | `templates/SPEC.md` |
 | `docs/blueprint/TASKS.md` | Ordered, small tasks an agent can do one at a time, each with a check | `templates/TASKS.md` |
 
-**The documents stay on the user's machine.** Before writing the first one, create `docs/blueprint/.gitignore` containing the single line `*`, so git ignores the whole folder without changing the project's own `.gitignore`. Never commit, push, or upload these files unless the user explicitly asks.
+**The documents stay on the person's machine.** Before writing the first one, create `docs/blueprint/.gitignore` containing the single line `*`, so git ignores the whole folder without changing the project's own `.gitignore`. Never commit, push, or upload these files unless the person explicitly asks. Blueprint itself writes nothing else in the project: no product code, no branches or folders. Those come later, from tasks the coding agent runs.
 
-## Principles
+## Modes
 
-- **The user owns the decisions; you own the structure.** Never silently invent requirements. If you fill a gap with a default, mark it as an assumption so the user can see and change it.
-- **Never guess values that must match existing things.** Class or label IDs, column names, status names, file naming rules, formats, units, API fields: if the value has to match data, files, or systems that already exist, ask. Do not pick one and move on, even if it seems obvious. A data sample shows which values occur, not every value that exists: confirm a full list (all statuses, all classes) with the user unless a definition or schema in the files gives it.
-- **Write for an agent that has never met the user.** Every document must make sense with no chat history. If a sentence only makes sense because of the conversation, rewrite it.
-- **Testable over descriptive.** "Fast" is not a requirement; "the list loads in under 1 second with 1,000 items" is. Subjective checks (e.g., expert judgment) must still have a count or ratio that decides pass or fail.
-- **Say what not to do.** Out-of-scope items prevent more wasted work than in-scope items.
-- **Record the why behind decisions.** Agents (and people) undo decisions they don't understand.
-- **Small beats complete.** A short, correct document beats a long, padded one. Say each thing once, in one section of the document that owns it (PRD: what; SPEC: how; TASKS: order and checks), and refer to it everywhere else by ID or section, within the same document too, because copies drift apart; a "Done when" item may still quote the value it checks. Delete template sections that don't apply instead of filling them with filler.
+Pick the mode from the request.
 
-## Language
+| Mode | When | The documents describe |
+|---|---|---|
+| **New** | An idea, with nothing built yet, or a feature to add to existing code | The thing to build |
+| **Document** | An existing project someone wants to understand, debug, or improve | What exists, pointing into the code, plus tasks for what is wrong |
+| **Rebuild** | An existing project to redo from zero | A new design from the old project's core idea; outside contracts stay unless the AI judges a change worth its transition |
 
-- Write the documents in the language the user is speaking. Keep code identifiers, file paths, and technology names in their original form.
-- Headings in the templates are in English; translate them into the user's language.
-
-## Audience: assume a non-developer may be using this
-
-- Ask questions in plain language. Instead of "What's your auth strategy?", ask "Do people need to log in? If so, with email, Google, or something else?"
-- Explain a technical term the first time you use it, in one short clause.
-- If the user is clearly a developer (uses technical terms, names a stack), skip the explanations, but keep the same question rules.
+If `docs/blueprint/` already holds documents for the same project and mode, update them (see *Updating documents later*). If the new documents would replace them instead, first move them to `docs/blueprint/archive/{YYYY-MM-DD}/`; they are not in git, so overwriting them would lose them for good.
 
 ## Who decides what
 
-Ask the user only what the user can actually know. Decide the rest yourself.
+The AI decides everything it can judge: scope, features and their priority, stack, architecture, data design, algorithms, edge cases, and task order. Pick the option you would defend to a senior engineer and record it once, in the document that owns it, with its reason, marked **[AI]**. Do not hand the person a menu of design options; they asked you to decide.
 
-| Ask the user | Decide yourself |
-|---|---|
-| Goals, users, what the output is for | Algorithms, losses, training schedules, hyperparameters |
-| What "good enough" means and who judges it | Libraries, file layout, internal formats |
-| Facts about existing data, files, and systems | How to handle edge cases the user didn't mention |
-| Constraints: hardware, budget, deadlines, privacy | Display details such as colors |
-| Choices the user has already stated a preference on | Anything the user says they can't judge |
+The person holds only what the AI cannot judge or find:
 
-- Even an expert user usually can't judge deep technical trade-offs on the spot. Don't turn your job into a multiple-choice quiz for them.
-- **Every question costs the user effort. Ask only when a wrong guess is expensive.** When a choice has a safe default that is cheap to change later (e.g., "postpone the Mac test until a Mac is available"), take it, list it under Assumptions, and move on. Ask when a wrong guess would waste significant work, can't be undone, or must match existing data.
-- **Facts are never defaults**, even when they will become settings. How the user's work runs today (opening hours, limits, status names), deadlines, budgets, and the devices people use come from the user or their files. Read them from the files when the files settle them; otherwise ask.
-- When you decide, pick the option you'd defend to a senior engineer, record it in SPEC with its reason and rejected alternatives, and mark it **[AI]** (user decisions are **[User]**) so the user can see and override it.
-- If you genuinely can't tell which option is best, don't ask the user to guess either: make it an **Open choice** (see *2. Design*).
-- After deciding a batch of things, show a short summary of your [AI] decisions so the user can object. Silence or approval means proceed.
+- **Intent**: what they want and why, where the request and the files don't say.
+- **Outside facts**: what is true outside the files: programs or people that depend on the project's outputs (file formats, APIs, IDs), real data that isn't in the folder, deadlines, budget, the devices people use, legal or privacy limits.
 
-## How to ask
+Rules for facts:
 
-These rules apply to every question in every step.
+- **Read before you ask.** Code, data, schemas, configs, README, and git history often settle a fact. Use them and mark the result **[Code]**.
+- **Never invent a value that must match something existing**: IDs, class lists, column or status names, file formats, API fields. Read it from a definition (a schema, an enum, a spec). A data sample shows which values occur, not every value that exists. If no definition settles it, it is a question.
+- **An unknown fact that is cheap to correct later becomes an assumption**: take the likeliest value, list it under the PRD's Assumptions, and move on. An assumption describes the world (how many orders a day, which phones people use); a value the product chooses (slot length, a limit, a retention period) is a decision, marked [AI] where it is defined.
+- **When only an experiment can tell which option is best** (model architecture, thresholds, a library of unknown fit), write it as an **Open choice** in SPEC: the candidates, how they are compared, and the rule that picks the winner. Neither guess nor ask.
 
-1. **One question per turn.** Never stack several questions in one message, even related ones. The user should be able to answer with a single letter or a few words.
-2. **Offer options.** Give 3–4 labelled choices, (a) to (d), each with a short consequence, plus a way to answer freely. Mark the one you recommend with a one-line reason.
-3. **Confirm before building on an inference.** If you interpreted an answer (e.g., "labeling assistant" → "a person corrects the output"), state your interpretation and ask "Is this right?" as its own question before asking anything that depends on it. Short or ambiguous answers ("ignore it", "the usual") always need this.
-4. **Acknowledge, then ask.** Start each turn by restating in one or two lines what you just recorded, so the user can catch mistakes immediately.
-5. **Most important first.** Ask about things that change what gets built before details.
+## Asking
+
+Ask at most one round of questions, before writing, and usually none. A question is allowed only when all of these hold:
+
+1. The answer is not in the request or the files.
+2. A wrong guess would waste significant work, could not be undone, or must match something existing.
+3. No assumption would be safe.
+
+Put every allowed question into that one message, numbered, in plain language, each with your recommended answer and what it leads to, so the person can reply "ok" to accept all recommendations or correct only the wrong ones. Explain a technical term the first time you use it in a short clause, unless the person is clearly a developer. An answer the person gave or accepted, even with "ok", is marked [User]. If they say "just do it" or don't know, your recommendations become assumptions. Ask in the person's language.
+
+After that round, don't stop for approval. If writing uncovers a new question that meets the same bar, ask it alone; this should be rare.
 
 ## Workflow
 
-### 0. Check what exists
+### 1. Read
 
-Look for existing documents in `docs/blueprint/`, a `README`, data, or code. If documents exist, **update** them instead of starting over, and tell the user what you changed. If the user wants documents for a project that is already built (to understand, document, debug, or improve it) rather than a plan for something new, follow *From an existing project* instead of steps 1–3. Otherwise, if code or data exists, read enough of it to keep the documents consistent with reality — and to answer "must match existing" questions yourself where the files make the answer certain.
+Read what exists: the request, README, code, data, and `docs/blueprint/`. In New mode, read enough to keep the documents consistent with what is already there. In Document and Rebuild modes, read as the mode's section says.
 
-### 1. Interview (PRD)
+While reading, find the **center** of the request and write it as one sentence holding whichever of these show: the problem, what pulls against what, the purpose, what it is bound by, and what the person is dissatisfied with. It opens the PRD's Problem section, and every later step must keep it. For a small, clear request the sentence is obvious; write it and move on.
 
-Goal: understand the problem before the solution.
+When the problem is unclear or a complaint recurs, go further:
 
-- Start with one open question: "What do you want to build, and what problem does it solve?"
-- Then follow *How to ask*. Cover, in roughly this order:
-  1. Who uses it and what problem they have today
-  2. What happens with the result: who uses the output and for what
-  3. The core flow: what a user does from start to finish in the main scenario
-  4. What "done" looks like for the first version (success criteria)
-  5. What is explicitly **not** in the first version
-  6. Constraints: deadline, budget, the devices each kind of user has, privacy
-- **If the project learns from or processes data** (ML models, data pipelines, analysis), also cover:
-  - The input data: kind, amount, sizes, file formats, quirks (e.g., overlays, noise, missing values)
-  - Labels or ground truth: format, how files are paired, ID/class numbering, how reliable they are
-  - Evaluation: how anyone will know the output is good, and on which data. Make sure evaluation data exists and is separate from training data — check that the numbers add up.
-  - The output format, and what consumes it
-- Stop interviewing when you can fill the PRD template's required sections. Unknowns go into "Open questions".
-- If the user says "just write it", draft with clearly marked assumptions instead of asking more.
+- **Look for what repeats.** The same complaint, failure, or structure under different words is a lead. Count it only when it shows up at least twice in what the person actually said, the code, or the data.
+- **Look at the counterpart.** For a repeated pain, find what it is inside the system, and what the effect does back to its cause. "It's slow", "nothing happens", and "it shows up late" may be one wait stuck at one point in the system.
+- **A lead is a hypothesis.** Confirm it against the files, by reading or running them, before any document relies on it.
 
-Write `docs/blueprint/PRD.md` from `templates/PRD.md`. Show a short summary (not the whole file) and ask the user to confirm or correct it. Then run the *Review gate*.
+### 2. Ask
 
-### 2. Design (SPEC)
+Only if a question passes *Asking*.
 
-Goal: decide how, at the level an agent needs to start without guessing.
+### 3. Write
 
-- Derive as much as possible from the PRD, and ask only what *Who decides what* leaves to the user (e.g., "Must it run on a phone?", "Do you already have a model in mind?").
-- Prefer a simple, mainstream stack with fewer moving parts.
-- If a technical decision would change what the user gets (a PRD-level change, e.g., inference now needs labels as input), it is no longer a technical detail: confirm it with the user and update the PRD first.
-- **When the right choice can only be found by trying** (model architecture, loss, hyperparameters, thresholds, libraries with unknown fit), don't force a decision. Write it under **Open choices** as candidates, how they will be compared, and the rule that picks the winner.
+Write PRD, then SPEC, then TASKS, each from its template, without stopping between them.
 
-Write `docs/blueprint/SPEC.md` from `templates/SPEC.md`. Summarize the key decisions for the user and confirm. Then run the *Review gate*.
+- **Write for an agent that has never met the person.** Every document must make sense with no chat history. Write the PRD so the person can read it too, in plain words; SPEC and TASKS are for the coding agent and may be technical.
+- **Testable over descriptive.** "Fast" is not a requirement; "the list loads in under 1 second with 1,000 items" is. Subjective checks (e.g., expert judgment) need a count or ratio that decides pass or fail.
+- **Say what not to do.** Out of scope lists what an agent might helpfully add.
+- **Record the why.** Agents undo decisions they don't understand. Each non-obvious decision gets its reason and the alternatives it beat.
+- **Say each thing once**, in the document that owns it (PRD: what; SPEC: how; TASKS: order and checks), and refer to it everywhere else by ID or section heading, within the same document too, because copies drift apart. A "Done when" item may quote the value it checks.
+- **Small beats complete.** Delete template sections that don't apply instead of filling them. Headings carry no numbers, so deleting one breaks nothing; refer to a section by its heading.
+- A technical decision that changes what the person gets (e.g., inference now needs labels as input) belongs in the PRD, marked [AI].
+- **Data projects** (ML models, pipelines, analysis): the PRD defines the input data, labels or ground truth, evaluation data kept separate from training data (check that the counts add up), and the output format and what consumes it.
+- **TASKS**: start with a thin end-to-end slice or a simple baseline, then improve. Each task fits one agent session, produces something runnable or checkable, names the requirement IDs it serves, and has "Done when" items a command or a person can verify. Each Open choice becomes an experiment task that records the winner in SPEC Decisions. Mark 👤 the steps only a person can do: expert judgment, a device the agent can't reach, getting data or credentials, deploying, or switching a live system over. Place them where they block as little as possible.
 
-### 3. Plan (TASKS)
+### 4. Review
 
-Goal: a sequence an agent can execute one task per session.
+Your own review replaces the person's approval.
 
-- Break work into tasks that each produce something runnable or checkable. Aim for tasks an agent can finish in one sitting.
-- Order them so the project works end-to-end as early as possible (a thin vertical slice or a simple baseline first), then improve.
-- Every task has **Done when** criteria that a person or a command can verify.
-- Link each task to the PRD requirement it serves (e.g., `R2`).
-- Each Open choice in SPEC becomes an experiment task whose result is recorded back into SPEC Decisions.
-- Some steps can only be done by a person: expert judgment, testing on a device the agent can't reach, getting data or credentials. Mark them 👤. The agent prepares everything for them and stops. Put 👤 tasks that don't block others (e.g., a check on another device) where they can wait without holding up the rest.
+1. **Check against the center first.** Every part of the center sentence is answered by a requirement, a constraint, or an Out of scope item with a reason. A plausible plan that dropped part of it, or swapped the problem for an easier one, solves a different problem: go back to the center and redesign, not just reword. Also check that the plan does more than follow the person's words, and that each part built on a repeat or counterpart made the plan better; remove the parts that didn't.
+2. Check each document against its sections of `references/checklist.md` and against the other documents.
+3. Fix everything that needs no intent or outside fact. What does need one becomes an assumption or an Open question.
+4. If you can start a subagent that does not inherit this conversation, give it only the three documents (in Rebuild mode, also the old code at the recorded commit), tell it to review and not build, and ask it to list every point where it would have to guess or ask before building. Fix each real gap.
+5. Recheck what the fixes touched against the checklist. Run a fresh reader again only when the fixes changed the design, not just the wording.
 
-Write `docs/blueprint/TASKS.md` from `templates/TASKS.md`. Then run the *Review gate*.
+### 5. Report
 
-### Review gate (after every document)
+One short message in plain language, with results and next steps only, not the process that led to them:
 
-Run this after the user confirms each document, **even if they approved it without changes**: approval does not mean the document is complete.
+- which files were written, and that they are kept out of git (in a git repository, confirm `git status` does not list `docs/blueprint/`);
+- the [AI] decisions that most shape the result, a few lines, and that the person can override any of them by saying so;
+- the assumptions and open questions, most consequential first;
+- how to start building: open a new session of the coding agent in this same folder and paste the prompt from the *How to use* section of `TASKS.md`. Quote it. The files are not in git, so a separate clone, worktree, or cloud task will not have them unless a task copies them there.
 
-1. Check the document against its section in `references/checklist.md`, and against the documents written before it.
-2. Report what you found as a short list, most serious first, each with one line of why it matters.
-3. Fix what you can yourself without a user decision (moving content, listing an assumption) and say so.
-4. Ask about the rest following *How to ask* — one at a time.
-5. Update the document, then review again. Move on only when a review finds nothing new.
+## Document mode
 
-### 4. Final review and hand-off
+The code shows what the project does. The documents record that, plus the intent behind it, so someone new can find their way around, fix it, and extend it.
 
-Run the "Across documents" section of `references/checklist.md` over all three files and fix anything left. If the project is a git repository, confirm that `git status` does not list `docs/blueprint/`. Then tell the user:
+1. **Read thoroughly.** Find the entrypoints, how to run and test it, the main flows, the data, and outside services. Run the tests and safe commands that show behavior, and note the results; never run anything that sends, deploys, deletes, or touches real accounts. Where the README, comments, or tests disagree with the code, the code shows what happens, and the disagreement is a finding.
+2. **Point to the code.** Every interface, rule, and data structure in SPEC names the file and function that implement it (e.g., `rules.py` `available_slots()`). Put the commit you read (or the date, outside git) in each document's header.
+3. **Built is not the same as intended.** For each finding (a contradiction, a crash, a mismatch with docs or tests), judge from the evidence whether it is a bug or intended: tests, docs, commit messages, and how the rest of the code treats the case. Intended behavior becomes a requirement; a bug becomes a task. When the evidence can't tell and the answer changes what gets built, it is a question for the round, if it passes *Asking*, or else an Open question.
+4. **Write**: PRD — what it does today, for whom, and what it deliberately doesn't do. SPEC — how it works, marked [Code]; a past decision whose reason no evidence gives goes under Open questions, never an invented reason. TASKS — the work the findings call for, most serious first: bug fixes with a regression test that fails first, doc fixes, missing tests for important rules, and code too unclear to change safely.
 
-- which files were written, and that they are kept out of git,
-- the remaining open questions and assumptions, if any,
-- how to start building: open a new session of their coding agent in this same folder and paste the prompt from the *How to use* section of `docs/blueprint/TASKS.md`. Quote that prompt so they can copy it. The files are not in git, so a separate clone, worktree, or cloud task will not have them.
+## Rebuild mode
 
-## From an existing project
+The old project is evidence, not a spec. Keep its idea; decide everything else again from zero, its promises to the outside world included, but never break one without a transition.
 
-The code shows what the project does; the user knows why. The documents record both, so someone who has never seen the project can find their way around it, fix it, and extend it.
+1. **Read the old project** as in Document mode step 1, and record its commit (or the date) in each document's header. Take four things from it:
+   - **Core idea**: the problem, the users, and the outcome they get. This is the only part of the old design carried over as given.
+   - **Outside contracts**: whatever outside the code depends on it: files or data other programs read or write, stored user data, API endpoints and fields, commands that scripts call, IDs and names shared with other systems. That they exist is a fact; whether to keep them is a design decision like any other. Keep a contract when it serves the core idea. Change or drop it when a clearly better design needs that, recorded in SPEC Decisions as [AI] with the reason and what it costs the people who rely on it. A changed contract gets a transition: stored data is migrated, and where consumers outside the files may exist, the new version still accepts the old form for a while after the switch-over (e.g., the old command name still runs and points to the new one). Ask whether anyone else depends on an output only when its consumers are not in the files and no transition is possible. Live data the old version keeps writing stays where it is: the new version works on a copy until the switch-over, and its branch never commits changes to that data.
+   - **Lessons**: bugs, crashes, workarounds, slow or confusing parts. Each becomes a requirement or check the new version must meet, not code to copy. When several share one cause, the cause is the lesson, and the new design removes it.
+   - **Why it is being rebuilt**: the person's dissatisfaction with the old version is part of the center. The new design must answer it, not just be newer.
+2. **Design from zero.** Write the PRD from the core idea, not from the old feature list. Keep an old feature only when the core idea needs it; list each dropped one under Out of scope with a one-line reason, so nobody re-adds it. Choose the stack and structure as for a new project. Reusing the old ones is fine only when they win on their own merits, recorded in Decisions.
+3. **Decide where the new code goes**, in SPEC Decisions. Default: a new folder next to the project (in a git repository, a `git worktree` on a new branch), so the old version keeps running on its own files while the new one is built. Blueprint only records the choice; the first task creates the place.
+4. **Plan the TASKS**: the first task, run in the old folder, creates that place, copies `docs/blueprint/` into it, and tells the person to continue there. A check that proves each kept contract against the old version (it reads the old version's files correctly, and what it writes keeps the format outside readers expect), and each changed contract's transition (old data migrates, the old form still works), comes as soon as the slice that touches it exists. The check holds the new version to the contract, not to the old version's bugs: where the old output is wrong, the requirement decides. The last task is 👤: switching over from the old version, since replacing a working system is the person's call; it includes a check for each assumption about an outside contract (e.g., the finance spreadsheet still imports the file), telling the users of each changed contract what changes, and a date to remove each old form. SPEC points to the old code at the recorded commit wherever a check compares against it, so the coding agent and the fresh reader in *4. Review* can read it there. The report names every changed contract first among the [AI] decisions.
 
-1. **Read before asking.** Find the entrypoints, how to run and test it, the main flows, the data, and outside services. Run the tests and safe commands that show behavior, and note the results; never run anything that sends, deploys, deletes, or touches real accounts. Where the README, comments, or tests disagree with the code, the code shows what happens, and the disagreement is a finding.
-2. **Point to the code.** Every interface, rule, and data structure in SPEC names the file and function that implement it (e.g., `rules.py` `available_slots()`), so a reader can jump from the document to the code. Put the commit you read (or the date, outside git) in each document's header line.
-3. **Built is not the same as intended.** Requirements say what the project is meant to do. Behavior that looks unintended (a contradiction, a crash, a mismatch with the docs or tests) is a finding, not a requirement. Ask the user about intent, not about how the code works: who uses it and why when the code can't tell you, and for each finding whether it is a bug or intended, one at a time, most serious first, following *How to ask*. Intended behavior becomes a requirement, a bug becomes a task, and an unanswered finding stays an Open question.
-4. **Write the documents** from the same templates, in the same order, running the *Review gate* after each and *4. Final review and hand-off* at the end:
-   - PRD: what it does today, for whom, and what it deliberately doesn't do.
-   - SPEC: how it works, with code pointers. Mark what you read in the code **[Code]**. A past decision whose reason neither the user nor the code history gives goes under Open questions, not Decisions with an invented reason.
-   - TASKS: the work the findings call for, most serious first: bug fixes with a regression test that fails first, doc fixes, missing tests for important rules, and code too unclear to change safely.
+## Language
+
+- Write the documents in the language the person is speaking. Keep code identifiers, file paths, and technology names in their original form.
+- The templates' headings and the *How to use* prompt in TASKS are in English; translate them, keeping the prompt's "Done when" label identical to the one the tasks use.
+- The language of the product's own screens and messages is a product decision, marked [AI]: keep the language an existing product clearly uses throughout (a stray string is not a choice), otherwise use the language of the people who will use it.
 
 ## Updating documents later
 
-When requirements change mid-project, update the PRD first, then SPEC, then TASKS, so the documents never contradict each other, and review each changed document as in the *Review gate*. Add a line to the PRD's Change log. When an experiment settles an Open choice, move it to Decisions in SPEC with the result. Check off completed tasks in place rather than deleting them.
+When the person adds something or pushes back, don't turn at once. First sort it: it strengthens the current plan, corrects part of it, is a separate matter (a new item or a later version), or overturns the center. Change only what it touches. If you don't take it, say why in a line. If there is evidence that the center itself was wrong, say what changed and why, then rewrite the center sentence and redesign from it. When the person overrides an [AI] decision with an option you judge worse, say why once, briefly, then do it their way and mark it [User]; if it could not be undone, confirm once before writing it. Then update the PRD first, then SPEC, then TASKS, so the documents never contradict each other, and review each changed document as in *4. Review*. Add a line to the PRD's Change log. When an experiment settles an Open choice, move it to SPEC Decisions with the result. Check off completed tasks in place rather than deleting them.

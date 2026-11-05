@@ -11,7 +11,7 @@
         "source": "github",
         "repo": "phykn/blueprint"
       },
-      "description": "Turn a rough idea into PRD, SPEC, and TASKS docs an AI coding agent can build from, or document an existing project the same way.",
+      "description": "Turn an idea into PRD, SPEC, and TASKS docs an AI coding agent can build from, with the AI making the planning decisions; or document or rebuild an existing project the same way.",
       "category": "productivity"
     }
   ]

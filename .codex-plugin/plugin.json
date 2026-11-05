@@ -1,7 +1,7 @@
 {
   "name": "blueprint",
-  "version": "0.4.1",
-  "description": "Turn a rough idea into PRD, SPEC, and TASKS docs an AI coding agent can build from, or document an existing project the same way.",
+  "version": "0.5.0",
+  "description": "Turn an idea into PRD, SPEC, and TASKS docs an AI coding agent can build from, with the AI making the planning decisions; or document or rebuild an existing project the same way.",
   "author": {
     "name": "phykn",
     "url": "https://github.com/phykn"
@@ -13,13 +13,14 @@
     "vibe-coding",
     "prd",
     "spec",
-    "planning"
+    "planning",
+    "rebuild"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Blueprint",
     "shortDescription": "Write PRD, SPEC, and TASKS before vibe coding",
-    "longDescription": "Use Blueprint to turn a rough idea into documents an AI coding agent can build from without guessing: a PRD (why and what), a SPEC (how), and TASKS (ordered, verifiable steps). It interviews in plain language, one question at a time, so non-developers can use it, and reviews each document against a checklist. Pointed at an existing project, it writes the same documents for what was built, with links into the code and tasks for what to fix.",
+    "longDescription": "Use Blueprint to turn a rough idea into documents an AI coding agent can build from without guessing: a PRD (why and what), a SPEC (how), and TASKS (ordered, verifiable steps). It makes the planning decisions itself and asks only for facts no file can tell it, at most in one short round, so non-developers can use it, and it reviews its own documents. Pointed at an existing project, it documents what was built, with links into the code and tasks for what to fix, or plans a rebuild from zero on the core idea, changing even outside contracts when a better design needs it, with a transition.",
     "developerName": "phykn",
     "category": "Productivity",
     "capabilities": [
@@ -30,7 +31,8 @@
     "defaultPrompt": [
       "Use Blueprint to turn my app idea into PRD, SPEC, and TASKS docs.",
       "Use Blueprint to plan this model before we write any code.",
-      "Use Blueprint to document this existing project so I can understand and improve it."
+      "Use Blueprint to document this existing project so I can understand and improve it.",
+      "Use Blueprint to plan a rebuild of this project from scratch."
     ],
     "websiteURL": "https://github.com/phykn/blueprint",
     "screenshots": []

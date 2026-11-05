@@ -15,7 +15,7 @@ Tell your coding agent:
 ### [ ] T1. {Project setup}
 
 - Serves: —
-- Do: {e.g., Create the project with the stack in SPEC §2 and make it run locally.}
+- Do: {e.g., Create the project with the stack in SPEC *Tech stack* and make it run locally.}
 - Done when:
   - [ ] {e.g., `npm run dev` starts and the home page shows the app name}
 
@@ -26,7 +26,7 @@ Tell your coding agent:
 - Done when:
   - [ ] {A checkable result}
 
-### [ ] T3. {Experiment: settle an Open choice from SPEC §5}
+### [ ] T3. {Experiment: settle an Open choice from SPEC *Open choices*}
 
 - Serves: R2
 - Do: {Run each candidate under the comparison conditions in SPEC.}

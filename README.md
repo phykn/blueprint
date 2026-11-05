@@ -1,16 +1,22 @@
 # Blueprint
 
-In vibe coding, the AI writes the code. The human's job is to write **good docs**.
+In vibe coding, the AI writes the code. With Blueprint, it writes the plan
+too: you bring the idea, and the AI decides the rest.
 
-Blueprint is a skill for Claude Code and Codex. It turns a rough idea into
+Blueprint is a skill for Claude Code and Codex. It turns an idea into
 documents an AI coding agent can build from without guessing: why you're
-building it, how it will work, and the exact steps to get there. You don't
-need to be a developer to use it.
+building it, how it will work, and the exact steps to get there. It makes the
+planning decisions itself and asks you only for what no file can tell it,
+usually nothing and at most one short round of questions. You don't need to
+be a developer to use it.
 
-It also works the other way: point it at a project that already exists, and
-it writes the same documents for what was built, with links into the code
-and a list of what to fix. That makes the project easier for people and
-agents to understand, debug, and improve.
+It has three modes:
+
+| Mode | You say | You get |
+| --- | --- | --- |
+| New | "I have an idea for an app" | A plan for building it |
+| Document | "Document this project so I can understand it" | Docs for what was built, with links into the code and tasks for what to fix |
+| Rebuild | "Rebuild this from scratch" | A new plan from zero built on the old project's core idea |
 
 ## What you get
 
@@ -22,6 +28,7 @@ agents to understand, debug, and improve.
 
 It works for web and mobile apps and for data projects such as deep learning
 models. The documents are written in the language you use with the agent.
+Blueprint writes only these documents, never the product code.
 
 The documents stay on your machine: Blueprint adds a `.gitignore` inside
 `docs/blueprint/` so git ignores them, and it never commits or pushes them
@@ -30,22 +37,34 @@ clone or worktree won't have them.
 
 ## How it works
 
-1. **Interview.** Blueprint asks one plain-language question at a time, with
-   choices to pick from. It asks only what you can actually know and decides
-   the technical details itself.
-2. **Design.** When a technical choice is needed, it proposes one with its
-   reason and marks it so you can see and override it. Questions that only an
-   experiment can settle, such as a model's architecture, become a list of
-   candidates and a rule for choosing.
-3. **Plan.** It orders the tasks so the smallest end-to-end working version,
-   or a baseline, comes first.
-4. **Review.** After you approve each document, Blueprint reviews it against a
-   checklist and reports gaps and contradictions.
+1. **Read.** Blueprint reads what is already there: your request, code, data,
+   and docs. For an existing project it runs the tests and safe commands too.
+   It sums up the center of the problem in one sentence and keeps it fixed
+   through every later step. When a complaint keeps coming back, it traces it
+   to its cause in the code or data before relying on it.
+2. **Ask, rarely.** It asks only for your intent or for facts outside the
+   files, such as another program that reads your data, and only when a wrong
+   guess would be costly. All questions come in one message, each with a
+   recommended answer, so "ok" is a full reply.
+3. **Decide and write.** It decides scope, stack, design, and task order
+   itself, and marks each decision **[AI]** with its reason, so you can see
+   and override it. Choices only an experiment can settle, such as a model's
+   architecture, become candidates and a rule for picking the winner. Tasks
+   start with the smallest end-to-end working version or a baseline.
+4. **Review itself.** It first checks that the plan still answers that
+   center, then checks the documents against a checklist and, where
+   it can, has a fresh agent read them cold and list every point where it
+   would have to guess. Then it fixes the gaps and reports its key decisions,
+   assumptions, and open questions.
 
-For an existing project, Blueprint reads and runs the code first and asks you
-only about intent: who it's for, and whether each suspicious behavior it
-found is a bug or intended. Bugs become tasks instead of requirements, and
-every rule in the SPEC names the file and function that implement it.
+In Rebuild mode, the old project is evidence, not a spec. Blueprint keeps its
+core idea and the lessons from its bugs, and decides everything else again,
+even the formats and interfaces other programs rely on. It drops every feature
+the core idea doesn't need, listing each with a reason. When it changes such
+a contract, it says so first in its report and plans a transition: old data
+is migrated and the old form keeps working for a while after it. By default it plans the new version in a separate folder,
+so the old one keeps working, with checks against the old one and a final
+switch-over step left to you.
 
 ## Install
 
@@ -85,6 +104,7 @@ Describe what you want to plan, and the skill starts on its own:
 I have an idea for an app. Help me write the docs before we code.
 Write a PRD for this model before we build it.
 I built this project with Claude last year. Document it so I can understand and fix it.
+This project grew messy. Rebuild it from scratch, keeping only the idea.
 ```
 
 To start it directly, type `/blueprint:blueprint` in Claude Code (`/blueprint`
