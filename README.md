@@ -45,9 +45,10 @@ The documents are written in the language you use with the agent. They stay on y
 
 ```text
 codex plugin marketplace add phykn/blueprint
+codex plugin add blueprint@blueprint
 ```
 
-Then install Blueprint from the Plugins directory (`/plugins` in Codex, or the Plugins page of the ChatGPT desktop app) and restart the app if it does not appear. These Codex steps follow the Codex plugin documentation; they have not been run on this repository's development machine, which has no Codex.
+Or, after adding the marketplace, install Blueprint from the Plugins directory (`/plugins` in Codex, or the Plugins page of the ChatGPT desktop app). Restart the app if it does not appear.
 
 ### Manual
 
@@ -65,7 +66,7 @@ claude plugin marketplace update blueprint
 claude plugin update blueprint@blueprint
 ```
 
-Then run `/reload-plugins` in a running session, or start a new one. In Codex, update the plugin from the same Plugins directory.
+Then run `/reload-plugins` in a running session, or start a new one. In Codex, run `codex plugin marketplace upgrade blueprint`, then `codex plugin add blueprint@blueprint` again, or update it from the Plugins directory.
 
 ## Use
 
