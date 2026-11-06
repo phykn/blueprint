@@ -2,12 +2,12 @@
 
 The single test: **Could a coding agent that has never seen this conversation build the right thing from these documents alone, without asking or guessing?**
 
-Use "Every document" and the section for each document (see *4. Review* in SKILL.md), plus "Document mode" or "Rebuild mode" when one applies, then "Across documents". Fix what you can yourself; what needs the person's intent or an outside fact becomes an assumption or an Open question.
+Use "Every document" and the section for each document (see *4. Review* in `SKILL.md`), plus "Existing project" or "From scratch" when that is where you started, then "Across documents". Fix what you can yourself; what needs the person's intent or an outside fact becomes an assumption or an Open question.
 
 ## Every document
 
 - [ ] Numbers add up: counts, totals, splits, dates, and limits agree wherever they meet.
-- [ ] Every decision the AI made is marked [AI] where it is written, with its reason. Every fact nobody stated and no file settles is listed under the PRD's Assumptions, not presented as known.
+- [ ] Every decision the AI made is marked [AI] where it is written, with its reason in Decisions. Every fact nobody stated and no file settles is listed under the PRD's Assumptions, not presented as known.
 - [ ] Every value that must match existing data, files, or systems (names, IDs, status values, formats) was read from a definition or given by the person, not inferred from a sample.
 
 ## PRD
@@ -31,9 +31,9 @@ Use "Every document" and the section for each document (see *4. Review* in SKILL
 
 - [ ] Every Must requirement in the PRD is covered by at least one interface, pipeline step, or rule.
 - [ ] Nothing in SPEC goes beyond the PRD (no features the PRD did not ask for).
-- [ ] Each stack choice has a one-line reason.
+- [ ] Every stack choice has a row in Decisions.
 - [ ] Data fields have types and key constraints (required, unique, limits).
-- [ ] Error and edge cases are described for each interface.
+- [ ] Each interface's Rules line names rules that exist in Rules and edge cases, and every error or edge case the interface can hit has one.
 - [ ] Non-obvious decisions are in the Decisions table with rejected alternatives.
 - [ ] How to run and test the project is written down, or obviously the stack default.
 
@@ -48,6 +48,7 @@ Use "Every document" and the section for each document (see *4. Review* in SKILL
 ## TASKS
 
 - [ ] The first tasks produce a running, end-to-end slice or baseline.
+- [ ] T1 adds the plan pointer: the *Plan* section goes into the coding agent's instruction file, with a Done when item for it (in documents an earlier Blueprint wrote, the first unchecked task does this).
 - [ ] Each task is small enough for one agent session.
 - [ ] Each task lists the requirement IDs it serves; every Must requirement appears in some task.
 - [ ] Every interface and rule in SPEC is built by some task, including rules that apply everywhere, such as response headers or error messages.
@@ -56,7 +57,7 @@ Use "Every document" and the section for each document (see *4. Review* in SKILL
 - [ ] Tasks do not depend on later tasks.
 - [ ] Steps only a person can do are marked 👤 and say what the agent prepares before stopping.
 
-## Document mode
+## Existing project
 
 - [ ] Every interface, rule, and data structure in SPEC names the file and function that implement it, and each one exists.
 - [ ] Each behavior claim was checked by running or reading the code, not inferred from names, comments, or the README.
@@ -65,7 +66,7 @@ Use "Every document" and the section for each document (see *4. Review* in SKILL
 - [ ] Each document's header names the commit or date of the code it describes.
 - [ ] Decisions give only reasons the person or the code history supplied.
 
-## Rebuild mode
+## From scratch
 
 - [ ] The PRD is built from the core idea (problem, users, outcome), not from the old feature list.
 - [ ] Every outside contract found in the old project (formats others read or write, stored data, API fields, called commands, shared IDs) is kept as a requirement, or changed by a decision in SPEC with its reason and cost; stored data has a migration.
@@ -80,10 +81,10 @@ Use "Every document" and the section for each document (see *4. Review* in SKILL
 
 - [ ] Every part of the PRD's center sentence is answered by the plan; no part of it was dropped or traded for an easier problem.
 - [ ] Every claim built on a repeated pattern was confirmed in the files, not only inferred.
-
 - [ ] Names (screens, entities, fields, classes) are spelled the same in all three files.
 - [ ] No document relies on the chat history to be understood.
 - [ ] No contradictions (e.g., PRD says "no login", SPEC has a login screen).
 - [ ] Each rule or value is written out in one section only; every other mention, in the same document or another, refers to it by ID or section.
+- [ ] Each kind of statement sits only where the ownership table in `references/writing.md` puts it.
 - [ ] Open questions are collected, not scattered or silently answered.
 - [ ] Unused template sections and placeholder text (`{...}`) are removed.

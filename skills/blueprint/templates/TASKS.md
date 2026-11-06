@@ -3,6 +3,7 @@
 > Ordered work plan. A coding agent should do **one task at a time**, top to bottom, and check it off when its "Done when" items pass.
 > Read `PRD.md` and `SPEC.md` before starting any task.
 > Tasks marked 👤 need a person. The agent prepares what the person needs, then stops; it does not fake the result. When a later session finds a 👤 task first, the agent asks whether the person has done it, checks what it can, and checks the task off once they confirm.
+> Mode: New | Existing (of {commit}) | From scratch (from {commit}) — Last updated: {YYYY-MM-DD}
 
 ## How to use
 
@@ -15,9 +16,17 @@ Tell your coding agent:
 ### [ ] T1. {Project setup}
 
 - Serves: —
-- Do: {e.g., Create the project with the stack in SPEC *Tech stack* and make it run locally.}
+- Do: {e.g., Create the project with the stack in SPEC *Tech stack* and make it run locally.} Then make the project self-starting: append the *Plan* section below to the instruction file your coding agent reads (`CLAUDE.md` for Claude Code, `AGENTS.md` for Codex; both if unsure; `.claude/CLAUDE.md` instead of `CLAUDE.md` when the project root is a Claude Code plugin, that is, `.claude-plugin/` exists there). Create the file if it is missing. Skip this step if the file already has a `## Plan` heading.
+
+  ```markdown
+  ## Plan
+
+  This project has a plan in docs/blueprint/ (PRD.md, SPEC.md, TASKS.md). Read them before changing code. When asked to continue building, do the first unchecked task in TASKS.md, verify its "Done when" items, check it off, and stop.
+  ```
+
 - Done when:
   - [ ] {e.g., `npm run dev` starts and the home page shows the app name}
+  - [ ] The instruction file contains the `## Plan` section above
 
 ### [ ] T2. {Thin end-to-end slice or simple baseline}
 

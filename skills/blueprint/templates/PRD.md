@@ -1,7 +1,7 @@
 # PRD: {Product or feature name}
 
 > Product Requirements Document. Explains **why** we are building this and **what** it must do. It does not say how.
-> Mode: New | Document (of `{commit}`) | Rebuild (from `{commit}`) — Last updated: {YYYY-MM-DD}
+> Mode: New | Existing (of {commit}) | From scratch (from {commit}) — Last updated: {YYYY-MM-DD}
 >
 > Markers: **[User]** said by the person · **[AI]** decided by the AI · **[Code]** read from existing code or files. Any [AI] item can be overridden.
 
@@ -60,7 +60,7 @@ How we know the first version is done. Each line must be checkable by a person o
 
 ## Out of scope
 
-Things we are deliberately **not** doing in this version, each with a one-line reason. The coding agent must not build these. In Rebuild mode, every dropped old feature is listed here.
+Things we are deliberately **not** doing in this version, each with a one-line reason. The coding agent must not build these. From scratch: every dropped old feature is listed here.
 
 - {e.g., Payments} — {e.g., orders are paid in person today}
 - {e.g., Multiple languages} — {...}

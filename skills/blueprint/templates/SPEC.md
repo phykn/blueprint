@@ -1,7 +1,7 @@
 # SPEC: {Product or feature name}
 
 > Technical specification. Explains **how** the requirements in `PRD.md` will be built, in enough detail that a coding agent can start without guessing.
-> Last updated: {YYYY-MM-DD} — Code read at: `{commit}` (Document and Rebuild modes)
+> Mode: New | Existing (of {commit}) | From scratch (from {commit}) — Last updated: {YYYY-MM-DD}
 >
 > Markers: **[User]** said by the person · **[AI]** decided by the AI · **[Code]** read from existing code or files. Any [AI] item can be overridden.
 
@@ -11,11 +11,13 @@
 
 ## Tech stack
 
-| Area | Choice | Why |
-|---|---|---|
-| {e.g., Language / framework} | {e.g., Python, PyTorch} | {one-line reason} |
-| {e.g., Data storage} | {e.g., SQLite} | {...} |
-| {e.g., Runtime} | {e.g., Local GPU} | {...} |
+Choices only; their reasons are in *Decisions*.
+
+| Area | Choice |
+|---|---|
+| {e.g., Language / framework} | {e.g., Python, PyTorch} |
+| {e.g., Data storage} | {e.g., SQLite} |
+| {e.g., Runtime} | {e.g., Local GPU} |
 
 ## Interfaces
 
@@ -25,7 +27,7 @@ How people or programs use the system: screens, commands, API endpoints. Referen
 
 - Input: {what the user provides, e.g., arguments, form fields}
 - Output: {what they get, including file names and formats}
-- Errors and edge cases: {what happens with no data, bad input, or failures; for a rule kept in *Rules and edge cases*, point to it instead of restating it}
+- Rules: {the names of the rules in *Rules and edge cases* that apply here, e.g., *Empty list*, *Duplicate name*; the rules themselves are written only there}
 - Code: {file and function that implement it, once the code exists}
 
 ## Data
@@ -48,10 +50,12 @@ The things the system reads, stores, or writes, and their structure.
 
 ### Fixed choices
 
-| Item | Choice | Why |
-|---|---|---|
-| {e.g., Starting point} | {e.g., ImageNet-pretrained encoder} | {...} |
-| {e.g., Data split} | {e.g., 20% held out before training, fixed seed} | {...} |
+Choices only; their reasons are in *Decisions*.
+
+| Item | Choice |
+|---|---|
+| {e.g., Starting point} | {e.g., ImageNet-pretrained encoder} |
+| {e.g., Data split} | {e.g., 20% held out before training, fixed seed} |
 
 ### Open choices
 
@@ -67,17 +71,19 @@ Choices that can only be settled by experiment. Each becomes an experiment task 
 
 ## Rules and edge cases
 
-{Behaviour that is easy to get wrong: validation, permissions, limits, duplicates, time zones, reserved values, etc.}
+Behaviour that is easy to get wrong: validation, permissions, limits, duplicates, time zones, reserved values, errors and empty states. Each rule is written here once, under a bold name that the interfaces refer to.
 
-- {e.g., Prices are stored in cents as integers to avoid rounding errors}
+- **{Rule name}**: {e.g., **Prices**: stored in cents as integers to avoid rounding errors}
+- **{Empty list}**: {e.g., the list screen shows "Nothing yet" and the add button}
 
 ## Decisions
 
-Why things are the way they are, so nobody undoes them by accident. Name each choice and point to the section that defines it; the reason and the rejected alternatives are what this table adds. A choice whose reason already sits in a "Why" column appears here only when its rejected alternatives are worth recording, and then without repeating the reason.
+Why things are the way they are, so nobody undoes them by accident. This table is the only place reasons and rejected alternatives are written. Name each choice and, in parentheses, the section that defines it.
 
 | Decision | Reason | Rejected alternatives |
 |---|---|---|
-| {e.g., No login in v1 (*Interfaces*)} [AI] | {Only one user; keeps setup simple} | {Email login} |
+| {e.g., No login in v1} (*Interfaces*) [AI] | {Only one user; keeps setup simple} | {Email login} |
+| {e.g., SQLite} (*Tech stack*) [AI] | {One file, no server to run} | {Postgres} |
 
 ## Project conventions
 
@@ -87,5 +93,7 @@ Why things are the way they are, so nobody undoes them by accident. Name each ch
 - Test: `{command}`
 
 ## Open questions
+
+Technical questions only; questions for the person are in the PRD.
 
 - {...}
