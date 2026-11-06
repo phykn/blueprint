@@ -1,11 +1,19 @@
 {
   "name": "blueprint",
-  "version": "0.5.0",
-  "description": "Turn an idea into PRD, SPEC, and TASKS docs an AI coding agent can build from, with the AI making the planning decisions; or document or rebuild an existing project the same way.",
+  "version": "1.0.0",
+  "description": "Where vibe coding starts: turn an idea, or a project you already have, into PRD, SPEC and TASKS docs a coding agent builds from without guessing.",
   "author": {
     "name": "phykn",
     "url": "https://github.com/phykn"
   },
   "homepage": "https://github.com/phykn/blueprint",
-  "repository": "https://github.com/phykn/blueprint"
+  "repository": "https://github.com/phykn/blueprint",
+  "keywords": [
+    "vibe-coding",
+    "prd",
+    "spec",
+    "planning",
+    "rebuild",
+    "skills"
+  ]
 }

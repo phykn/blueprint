@@ -1,7 +1,7 @@
 {
   "name": "blueprint",
-  "version": "0.5.0",
-  "description": "Turn an idea into PRD, SPEC, and TASKS docs an AI coding agent can build from, with the AI making the planning decisions; or document or rebuild an existing project the same way.",
+  "version": "1.0.0",
+  "description": "Where vibe coding starts: turn an idea, or a project you already have, into PRD, SPEC and TASKS docs a coding agent builds from without guessing.",
   "author": {
     "name": "phykn",
     "url": "https://github.com/phykn"
@@ -19,8 +19,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Blueprint",
-    "shortDescription": "Write PRD, SPEC, and TASKS before vibe coding",
-    "longDescription": "Use Blueprint to turn a rough idea into documents an AI coding agent can build from without guessing: a PRD (why and what), a SPEC (how), and TASKS (ordered, verifiable steps). It makes the planning decisions itself and asks only for facts no file can tell it, at most in one short round, so non-developers can use it, and it reviews its own documents. Pointed at an existing project, it documents what was built, with links into the code and tasks for what to fix, or plans a rebuild from zero on the core idea, changing even outside contracts when a better design needs it, with a transition.",
+    "shortDescription": "Where vibe coding starts: PRD, SPEC and TASKS before the code",
+    "longDescription": "Blueprint is where vibe coding starts. Give it an idea, or point it at a project you already have, and it writes the plan a coding agent builds from without guessing: a PRD (why and what), a SPEC (how) and TASKS (ordered, checkable steps). It makes the planning decisions itself, asks at most once for what no file can tell it, reviews its own documents, and ends with the one step that starts the build. It can also document an existing project, with pointers into the code and tasks for what to fix, or plan a rebuild from zero on the core idea, with a transition for every contract it changes.",
     "developerName": "phykn",
     "category": "Productivity",
     "capabilities": [

@@ -3,7 +3,7 @@
   "owner": {
     "name": "phykn"
   },
-  "description": "Marketplace for Blueprint: write the docs before vibe coding.",
+  "description": "Where vibe coding starts: turn an idea, or a project you already have, into PRD, SPEC and TASKS docs a coding agent builds from without guessing.",
   "plugins": [
     {
       "name": "blueprint",
@@ -11,7 +11,7 @@
         "source": "github",
         "repo": "phykn/blueprint"
       },
-      "description": "Turn an idea into PRD, SPEC, and TASKS docs an AI coding agent can build from, with the AI making the planning decisions; or document or rebuild an existing project the same way.",
+      "description": "Where vibe coding starts: turn an idea, or a project you already have, into PRD, SPEC and TASKS docs a coding agent builds from without guessing.",
       "category": "productivity"
     }
   ]
