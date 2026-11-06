@@ -74,7 +74,7 @@ Your own review replaces the person's approval.
 1. **Check against the center first.** Every part of the center sentence is answered by a requirement, a constraint, or an Out of scope item with a reason. If the plan dropped part of it or swapped in an easier problem, go back to the center and redesign, not just reword. Check too that the plan does more than echo the person's words, and drop any part built on a repeat or counterpart that did not make the plan better.
 2. Check each document against its sections of `references/checklist.md` and against the other documents.
 3. Fix everything that needs no intent or outside fact; what does need one becomes an assumption or an Open question.
-4. If you can start a subagent that does not inherit this conversation, give it only the three documents (From scratch: also the old code at the header's commit) and have it review, not build, listing every point where it would have to guess or ask. Fix each real gap; if no such subagent exists, say so in the report.
+4. If you can start a subagent that does not inherit this conversation, run the fresh reader in `references/checklist.md` *Fresh reader* and fix each real gap; if no such subagent exists, say so in the report.
 5. Recheck what the fixes touched; run a fresh reader again only if the fixes changed the design, not just the wording.
 
 ### 5. Hand off

@@ -88,3 +88,12 @@ Use "Every document" and the section for each document (see *4. Review* in `SKIL
 - [ ] Each kind of statement sits only where the ownership table in `references/writing.md` puts it.
 - [ ] Open questions are collected, not scattered or silently answered.
 - [ ] Unused template sections and placeholder text (`{...}`) are removed.
+
+## Fresh reader
+
+Used by *4. Review* in `SKILL.md`. Give the subagent only the three documents (From scratch: also the old code at the header's commit) and have it review, not build, listing every point where it would have to guess or ask. Keep that question open: the reader's job is to find what lies outside your frame, so do not narrow it to the places you already doubt.
+
+- Check facts by script before you start it: the line numbers, counts, quotes, paths, command options, and data on this machine that the documents claim. Hand the reader the results as an "already checked" list so it does not check them again.
+- Cap its answer at about 800 to 1,500 words.
+- A rerun after fixes reviews only what changed, with the earlier findings and their fixes.
+- If the review runs long, do not restart it; message it to report what it has found so far.
