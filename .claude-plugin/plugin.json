@@ -1,6 +1,6 @@
 {
   "name": "blueprint",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Where vibe coding starts: turn an idea, or a project you already have, into PRD, SPEC and TASKS docs a coding agent builds from without guessing.",
   "author": {
     "name": "phykn",

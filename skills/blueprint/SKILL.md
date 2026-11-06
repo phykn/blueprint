@@ -1,6 +1,6 @@
 ---
 name: blueprint
-description: Where vibe coding starts. Give it an idea, or point it at a project you already have, and it writes the plan a coding agent can build from without guessing: docs/blueprint/PRD.md (why and what), SPEC.md (how) and TASKS.md (ordered, checkable steps). The AI makes the planning decisions and asks only for what no file can tell it, at most once. Use when the user wants to start vibe coding, plan an app, feature or ML model before coding, write a PRD or spec, understand or fix an existing codebase, or rebuild one from scratch, or says "I have an idea for an app", "write docs so Claude/Codex can build it", "이 프로젝트 블루프린트로 정리해 줘", "처음부터 다시 짜 줘". Writes documents only, never product code. Not for explaining one piece of code. Works for non-developers.
+description: 'Where vibe coding starts. Give it an idea, or point it at a project you already have, and it writes the plan a coding agent can build from without guessing: docs/blueprint/PRD.md (why and what), SPEC.md (how) and TASKS.md (ordered, checkable steps). The AI makes the planning decisions and asks only for what no file can tell it, at most once. Use when the user wants to start vibe coding, plan an app, feature or ML model before coding, write a PRD or spec, understand or fix an existing codebase, or rebuild one from scratch, or says "I have an idea for an app", "write docs so Claude/Codex can build it", "이 프로젝트 블루프린트로 정리해 줘", "처음부터 다시 짜 줘". Writes documents only, never product code. Not for explaining one piece of code. Works for non-developers.'
 ---
 
 # Blueprint
