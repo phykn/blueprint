@@ -85,7 +85,6 @@ To start it directly, type `/blueprint:blueprint` in Claude Code (`/blueprint` i
 ```text
 plugin.json                 Codex plugin manifest (portable Agent Plugins format)
 .claude-plugin/             Claude Code plugin and marketplace manifests
-.codex-plugin/plugin.json   Codex compatibility manifest, kept during the transition
 .agents/plugins/            Codex marketplace
 skills/blueprint/
 ├── SKILL.md                The skill's instructions
@@ -119,7 +118,7 @@ Size limits: `skills/blueprint/SKILL.md` stays at or under 10,000 bytes and 160 
 
 ### Release
 
-1. Set the same new version in `.claude-plugin/plugin.json`, `plugin.json` and `.codex-plugin/plugin.json`.
+1. Set the same new version in `.claude-plugin/plugin.json` and `plugin.json`.
 2. Merge the release branch into `main`.
 3. Run `claude plugin tag` and push the branch and the tag.
 4. Update your own installation: `claude plugin marketplace update blueprint`, `claude plugin update blueprint@blueprint`, then `/reload-plugins`.
