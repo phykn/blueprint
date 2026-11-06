@@ -1,2 +1,2 @@
-# Local simulation and dev scratch (not part of the skill)
-examples/
+# Written by each `claude plugin eval` run (not part of the plugin)
+evals/results/
