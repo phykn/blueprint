@@ -17,7 +17,7 @@ The person brings an idea. The AI plans what to build, how, and in what order, a
 
 **The documents stay on the person's machine.** Before writing the first one, create `docs/blueprint/.gitignore` containing the single line `*`, so git ignores the folder. Never commit, push, or upload them unless the person asks.
 
-**Documents an earlier Blueprint wrote are the current documents**: update them in place (*Later changes*; older headers and paths: `references/writing.md` *Earlier documents*). Move documents to `docs/blueprint/archive/{YYYY-MM-DD}/` only when yours replace those of another project or starting point; they are not in git, so overwriting would lose them.
+**Documents an earlier Blueprint wrote are the current documents**: update them in place (*Later changes*; older headers and paths: `references/writing.md` *Earlier documents*). Archive them only when yours replace those of another project or starting point; they are not in git, so overwriting would lose them. File names: `references/writing.md` *Files in docs/blueprint*.
 
 ## Where you start
 

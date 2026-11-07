@@ -74,7 +74,7 @@ Use "Every document" and the section for each document (see *4. Review* in `SKIL
 - [ ] Every bug or pain point found in the old project is a requirement or a check in the new plan.
 - [ ] Each reuse of the old stack or structure is in Decisions with a reason of its own.
 - [ ] Each document's header names the commit or date of the old code that was read.
-- [ ] SPEC Decisions says where the new code goes so the old version keeps working; the first task sets it up and the last task is a 👤 switch-over.
+- [ ] SPEC Decisions says where the new code goes: a new branch in the same folder, or a new folder only when the old version must keep running meanwhile; the first task sets it up and the last task is a 👤 switch-over.
 - [ ] Each kept contract has a task that checks it against the old version; each changed contract has a transition (migration, old form still accepted for a while after the switch-over) with a task that checks it.
 
 ## Across documents
@@ -88,6 +88,7 @@ Use "Every document" and the section for each document (see *4. Review* in `SKIL
 - [ ] Each kind of statement sits only where the ownership table in `references/writing.md` puts it.
 - [ ] Open questions are collected, not scattered or silently answered.
 - [ ] Unused template sections and placeholder text (`{...}`) are removed.
+- [ ] Every file the plan adds to `docs/blueprint/` follows *Files in docs/blueprint* in `references/writing.md`: one plan at the top, `archive/{YYYY-MM-DD}-{name}/`, `work/T{n}-{what}`.
 
 ## Fresh reader
 

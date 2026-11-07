@@ -27,6 +27,15 @@ Rules for *3. Write* in `SKILL.md`: PRD, then SPEC, then TASKS, each from its te
 | What only an experiment settles | SPEC *Open choices* | TASKS experiment tasks name the item |
 | Order and checks | TASKS *Tasks*, Done when items | — |
 
+## Files in docs/blueprint
+
+The folder holds one plan at a time, so every session knows which one to read.
+
+- At the top sit only `PRD.md`, `SPEC.md`, `TASKS.md` and `.gitignore`. Never a second set beside them (`PRD-v2.md`, `docs/blueprint-v2/`, `docs/blueprint2/`): a later plan for the same project updates the three or replaces them as below.
+- A replaced plan moves to `archive/{YYYY-MM-DD}-{name}/`, where `{name}` is a short kebab-case name from the old PRD's title (e.g., `archive/2026-11-06-todo-cli/`), so two archives from one day stay apart. An archived plan is never the current one; the new PRD's Change log names its folder.
+- Anything else a task writes (inventories, review notes, eval output, switch-over notes) goes in `work/` as `T{n}-{what}.{ext}`, where `T{n}` is the task that writes it (e.g., `work/T3-inventory.md`), and that task's Done when names the file.
+- Files an earlier version left elsewhere in the folder stay where they are, since tasks may point to them; new files follow these rules.
+
 ## Earlier documents
 
 Documents an earlier Blueprint wrote are updated in place, whatever version wrote them (*What it writes* in `SKILL.md`):
