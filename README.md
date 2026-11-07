@@ -28,9 +28,9 @@ The documents are written in the language you use with the agent. They stay on y
 
 1. **Read.** Blueprint reads your request, code, data and docs, runs the tests and safe commands of an existing project, and sums up the center of the problem in one sentence that every later step must keep.
 2. **Ask, rarely.** It asks only for your intent or for facts outside the files, and only when a wrong guess would be costly: one message, each question with a recommended answer, so "ok" is a full reply.
-3. **Decide and write.** It decides scope, stack, design and task order itself, marks each decision **[AI]** with its reason so you can override it, and writes PRD, SPEC and TASKS without stopping for approval.
+3. **Decide and write.** It decides scope, stack, design, code structure and task order itself, marks each decision **[AI]** with its reason so you can override it, and writes PRD, SPEC and TASKS without stopping for approval.
 4. **Review itself.** It checks the plan against the center sentence and a checklist and, where it can, has a fresh agent read the documents cold and list every point where it would have to guess.
-5. **Hand off.** It reports the files, its key decisions and assumptions, and ends with the one prompt to paste into a new coding-agent session. That first task makes the project self-starting: it adds a short `## Plan` section to the agent's instruction file (`CLAUDE.md` or `AGENTS.md`), so every later session reads the plan first, does the next unchecked task, and stops.
+5. **Hand off.** It reports the files, its key decisions and assumptions, and ends with the one prompt to paste into a new coding-agent session. That first task makes the project self-starting: it adds a short `## Plan` section to the agent's instruction file (`CLAUDE.md` or `AGENTS.md`), so every later session reads the plan first, does the next unchecked task by the SPEC's code structure and rules, and stops. A tidy task before the final hand-over checks the code against them, so it needs no separate refactor.
 
 ## Install
 

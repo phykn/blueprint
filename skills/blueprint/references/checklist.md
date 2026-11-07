@@ -36,6 +36,7 @@ Use "Every document" and the section for each document (see *4. Review* in `SKIL
 - [ ] Each interface's Rules line names rules that exist in Rules and edge cases, and every error or edge case the interface can hit has one.
 - [ ] Non-obvious decisions are in the Decisions table with rejected alternatives.
 - [ ] How to run and test the project is written down, or obviously the stack default.
+- [ ] When the plan writes code: *Code structure* gives each module one owner and one-way dependencies, and *Code rules* is kept in full.
 
 ### SPEC — ML projects
 
@@ -56,6 +57,7 @@ Use "Every document" and the section for each document (see *4. Review* in `SKIL
 - [ ] Each task has "Done when" items that can be verified without judgment calls.
 - [ ] Tasks do not depend on later tasks.
 - [ ] Steps only a person can do are marked 👤 and say what the agent prepares before stopping.
+- [ ] When the plan writes code, *Tidy the code* is the last task before the closing 👤 tasks, with a leftover check for the stack.
 
 ## Existing project
 

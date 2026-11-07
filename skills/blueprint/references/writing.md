@@ -11,6 +11,7 @@ Rules for *3. Write* in `SKILL.md`: PRD, then SPEC, then TASKS, each from its te
 - A technical decision that changes what the person gets (e.g., inference now needs labels as input) belongs in the PRD, marked [AI].
 - **Data projects** (ML models, pipelines, analysis): the PRD defines the input data, labels or ground truth, evaluation data kept separate from training data (check that the counts add up), and the output format and what consumes it.
 - **TASKS**: start with a thin end-to-end slice or a simple baseline, then improve. Each task fits one agent session, produces something runnable or checkable, names the requirement IDs it serves, and has "Done when" items a command or a person can verify. Each Open choice becomes an experiment task that records the winner in SPEC Decisions. Mark 👤 the steps only a person can do: expert judgment, a device the agent can't reach, getting data or credentials, deploying, or switching a live system over. Place them where they block as little as possible.
+- **Code is shaped by the plan.** When the plan writes code, SPEC fills *Code structure* for this project and keeps *Code rules* (adding stack-specific rules, removing none), and the last task before the closing 👤 tasks is *Tidy the code*.
 - **T1 keeps the plan pointer.** The template's first task ends with the step that adds the *Plan* section to the coding agent's instruction file, and a Done when item for it. Keep both in every plan, with the file name the project needs, even when T1 has nothing else to do.
 
 ## Where each kind of statement lives

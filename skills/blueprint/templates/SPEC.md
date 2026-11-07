@@ -92,6 +92,26 @@ Why things are the way they are, so nobody undoes them by accident. This table i
 - Run: `{command}`
 - Test: `{command}`
 
+### Code structure
+
+{Each module or folder, the one thing it owns, and what it may use. Dependencies point one way, with no cycles; nothing uses the entry point. Existing mode: the structure as it is, marked [Code].}
+
+| Module | Owns | Uses |
+|---|---|---|
+| `{e.g., app/store.py}` | {Reading and writing `todos.json`} | {nothing} |
+| `{e.g., app/cli.py}` | {Commands and their output} | {`store`} |
+
+### Code rules
+
+Every task follows these, so the code needs no separate cleanup; the tidy task checks them across all of it.
+
+- Write the least code that does the task clearly. Add no option, wrapper, or layer that no caller needs yet.
+- Put code in the module that owns it in *Code structure*. Add a helper only for a real concept or for code used in more than one place; one-use code stays with its owner.
+- Name things by what they do, with the domain's terms, and one name per thing across modules.
+- Comments say only why: a constraint or decision the code cannot show.
+- Handle an error only where a real failure can happen or input comes from outside. No catch-all handlers, silent fallbacks, or checks for states the code cannot reach.
+- When a task makes earlier code duplicated or unused, remove it in the same task. Leave no unused code, debug output, or commented-out code.
+
 ## Open questions
 
 Technical questions only; questions for the person are in the PRD.

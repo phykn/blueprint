@@ -9,7 +9,7 @@
 
 Tell your coding agent:
 
-> Read docs/blueprint/PRD.md, docs/blueprint/SPEC.md and docs/blueprint/TASKS.md. Do the first unchecked task only. When finished, verify every "Done when" item, check the task off, and stop.
+> Read docs/blueprint/PRD.md, docs/blueprint/SPEC.md and docs/blueprint/TASKS.md. Do the first unchecked task only, following SPEC *Code structure* and *Code rules*. When finished, verify every "Done when" item, check the task off, and stop.
 
 ## Tasks
 
@@ -21,7 +21,7 @@ Tell your coding agent:
   ```markdown
   ## Plan
 
-  This project has a plan in docs/blueprint/ (PRD.md, SPEC.md, TASKS.md). Read them before changing code. When asked to continue building, do the first unchecked task in TASKS.md, verify its "Done when" items, check it off, and stop.
+  This project has a plan in docs/blueprint/ (PRD.md, SPEC.md, TASKS.md). Read them before changing code. When asked to continue building, do the first unchecked task in TASKS.md, following SPEC *Code structure* and *Code rules*, verify its "Done when" items, check it off, and stop.
   ```
 
 - Done when:
@@ -50,7 +50,16 @@ Tell your coding agent:
 - Done when:
   - [ ] {...}
 
-### [ ] 👤 T5. {Step only a person can do, e.g., expert review}
+### [ ] T5. Tidy the code
+
+- Serves: —
+- Do: Read all the code against SPEC *Code structure* and *Code rules*. Merge duplicated code, remove code, options and layers nothing uses, and move code that sits outside the module that owns it. Change no behavior: run the tests before and after.
+- Done when:
+  - [ ] Every test that passed before passes after
+  - [ ] What each module uses matches SPEC *Code structure*
+  - [ ] {A leftover check for the stack, e.g., `ruff check --select F401,F841` reports nothing}
+
+### [ ] 👤 T6. {Step only a person can do, e.g., expert review}
 
 - Serves: {success criterion}
 - Do: {What the person does. The agent prepares the inputs and stops.}
